@@ -20,8 +20,8 @@
 
 // ─── I18N ─────────────────────────────────────────────────────────────────────
 const TV_I18N = {
-  en: { on:"On", off:"Off", standby:"STANDBY", nowPlaying:"Now Playing", settings:"Settings", cardSettings:"Card Settings", general:"General", roomName:"Room / Device Name", brand:"TV Brand", entity:"Media Player", appearance:"Appearance", lang:"Language", apply:"Apply", idle:"Idle", unavailable:"Unavailable", launchApp:"Launch App", edit:"Edit", done:"Done", add:"Add", cancel:"Cancel", appName:"App name", packageId:"Package ID"},
-  ro: { on:"Pornit", off:"Oprit", standby:"STANDBY", nowPlaying:"Se redă acum", settings:"Setări", cardSettings:"Setări Card", general:"General", roomName:"Cameră / Dispozitiv", brand:"Brand TV", entity:"Media Player", appearance:"Aspect", lang:"Limbă", apply:"Aplică", idle:"Inactiv", unavailable:"Indisponibil", launchApp:"Lansează Aplicație", edit:"Editează", done:"Gata", add:"Adaugă", cancel:"Anulează", appName:"Nume aplicație", packageId:"ID pachet"},
+  en: { on:"On", off:"Off", standby:"STANDBY", nowPlaying:"Now Playing", settings:"Settings", cardSettings:"Card Settings", general:"General", roomName:"Room / Device Name", brand:"TV Brand", entity:"Media Player", appearance:"Appearance", lang:"Language", apply:"Apply", idle:"Idle", unavailable:"Unavailable", launchApp:"Launch App", edit:"Edit", done:"Done", add:"Add", cancel:"Cancel", appName:"App name", packageId:"Package ID", volumeSteps:"Volume Steps", volumeStepsHint:"0 = percentage, 25 = Google TV"},
+  ro: { on:"Pornit", off:"Oprit", standby:"STANDBY", nowPlaying:"Se redă acum", settings:"Setări", cardSettings:"Setări Card", general:"General", roomName:"Cameră / Dispozitiv", brand:"Brand TV", entity:"Media Player", appearance:"Aspect", lang:"Limbă", apply:"Aplică", idle:"Inactiv", unavailable:"Indisponibil", launchApp:"Lansează Aplicație", edit:"Editează", done:"Gata", add:"Adaugă", cancel:"Anulează", appName:"Nume aplicație", packageId:"ID pachet", volumeSteps:"Trepte Volum", volumeStepsHint:"0 = procente, 25 = Google TV"},
   de: { on:"An", off:"Aus", standby:"STANDBY", nowPlaying:"Jetzt läuft", settings:"Einstellungen", cardSettings:"Karten-Einstellungen", general:"Allgemein", roomName:"Raum / Gerät", brand:"TV-Marke", entity:"Media Player", appearance:"Aussehen", lang:"Sprache", apply:"Anwenden", idle:"Inaktiv", unavailable:"Nicht verfügbar", launchApp:"App starten", edit:"Bearbeiten", done:"Fertig", add:"Hinzufügen", cancel:"Abbrechen", appName:"App-Name", packageId:"Paket-ID"},
   fr: { on:"Allumé", off:"Éteint", standby:"VEILLE", nowPlaying:"En cours", settings:"Paramètres", cardSettings:"Paramètres carte", general:"Général", roomName:"Pièce / Appareil", brand:"Marque TV", entity:"Media Player", appearance:"Apparence", lang:"Langue", apply:"Appliquer", idle:"Inactif", unavailable:"Indisponible", launchApp:"Lancer App", edit:"Modifier", done:"Terminé", add:"Ajouter", cancel:"Annuler", appName:"Nom de l'app", packageId:"ID du paquet"},
   es: { on:"Encendido", off:"Apagado", standby:"EN ESPERA", nowPlaying:"Reproduciendo", settings:"Ajustes", cardSettings:"Ajustes de tarjeta", general:"General", roomName:"Habitación / Dispositivo", brand:"Marca TV", entity:"Media Player", appearance:"Apariencia", lang:"Idioma", apply:"Aplicar", idle:"Inactivo", unavailable:"No disponible", launchApp:"Lanzar App", edit:"Editar", done:"Listo", add:"Añadir", cancel:"Cancelar", appName:"Nombre de app", packageId:"ID de paquete"},
@@ -318,7 +318,7 @@ const TV_CSS = `
   .vfill { height: 100%; background: linear-gradient(90deg, rgba(255,255,255,.3), rgba(255,255,255,.65)); border-radius: 2px; position: relative; width: 0%; transition: width .3s; }
   .vthumb { width: 10px; height: 10px; border-radius: 50%; background: #fff; position: absolute; right: -5px; top: 50%; transform: translateY(-50%); box-shadow: 0 0 4px rgba(255,255,255,.3); transition: transform .2s; }
   .vbar:hover .vthumb { transform: translateY(-50%) scale(1.3); }
-  .vol-pct { font-size: 11px; color: rgba(255,255,255,.28); width: 30px; text-align: right; font-variant-numeric: tabular-nums; }
+  .vol-pct { font-size: 11px; color: rgba(255,255,255,.28); min-width: 36px; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
 
   /* SETTINGS MODAL */
   .overlay { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,.6); backdrop-filter: blur(8px); opacity: 0; pointer-events: none; transition: opacity .25s; }
@@ -412,6 +412,7 @@ class TvMediaCard extends HTMLElement {
       brand:             config.brand || '',
       language:          config.language || 'en',
       apps:              config.apps  || null,
+      volume_steps:      parseInt(config.volume_steps, 10) || 0,
     };
     this._lang = this._cfg.language;
     this._render();
@@ -613,6 +614,11 @@ class TvMediaCard extends HTMLElement {
             </div>
             <div class="s-sec">${this._t('appearance')}</div>
             <div class="s-row">
+              <div class="s-lbl">${this._t('volumeSteps')}</div>
+              <input class="s-inp" id="iVolSteps" type="number" min="0" max="100" value="${c.volume_steps || 0}" placeholder="${this._t('volumeStepsHint')}">
+              <div style="font-size:10px;color:rgba(255,255,255,.25);margin-top:2px;">${this._t('volumeStepsHint')}</div>
+            </div>
+            <div class="s-row">
               <div class="s-lbl">${this._t('lang')}</div>
               <select class="s-sel" id="iLang">
                 <option value="en">English</option>
@@ -686,7 +692,14 @@ class TvMediaCard extends HTMLElement {
 
     this._$('vbar').addEventListener('click', e => {
       const r   = e.currentTarget.getBoundingClientRect();
-      const pct = +Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)).toFixed(2);
+      let pct = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
+      const steps = this._cfg.volume_steps;
+      if (steps > 0) {
+        // Snap to nearest step
+        const step = Math.round(pct * steps);
+        pct = step / steps;
+      }
+      pct = +pct.toFixed(2);
       this._callMedia('volume_set', { volume_level: pct });
     });
 
@@ -711,11 +724,13 @@ class TvMediaCard extends HTMLElement {
       const brand  = this._$('iBrand').value.trim();
       const entity = this._$('iEntity').value;
       const lang   = this._$('iLang').value;
+      const volSteps = parseInt(this._$('iVolSteps').value, 10) || 0;
 
       if (name)   { this._cfg.name  = name;   this._$('room').textContent  = name; }
       if (brand)  { this._cfg.brand = brand;   this._$('brand').textContent = brand.toUpperCase(); }
       if (entity) this._cfg.entity = entity;
       if (lang)   { this._lang = lang; this._cfg.language = lang; }
+      this._cfg.volume_steps = volSteps;
 
       this._closeSettings();
       this._updateCard();
@@ -864,6 +879,7 @@ class TvMediaCard extends HTMLElement {
     this._$('iName').value  = this._cfg.name  || '';
     this._$('iBrand').value = this._cfg.brand || '';
     this._$('iLang').value  = this._lang;
+    this._$('iVolSteps').value = this._cfg.volume_steps || 0;
     this._$('overlay').classList.add('open');
   }
 
@@ -951,8 +967,17 @@ class TvMediaCard extends HTMLElement {
     // Volume
     const vol    = attr.volume_level    ?? 0;
     const muted  = attr.is_volume_muted ?? false;
+    const steps  = this._cfg.volume_steps;
     sr.getElementById('vfill').style.width  = (vol * 100).toFixed(1) + '%';
-    sr.getElementById('volPct').textContent = muted ? '🔇' : Math.round(vol * 100) + '%';
+
+    if (muted) {
+      sr.getElementById('volPct').textContent = '🔇';
+    } else if (steps > 0) {
+      const step = Math.round(vol * steps);
+      sr.getElementById('volPct').textContent = step + '/' + steps;
+    } else {
+      sr.getElementById('volPct').textContent = Math.round(vol * 100) + '%';
+    }
 
     const effVol = muted ? 0 : vol;
     const svg = sr.getElementById('volSvg');
