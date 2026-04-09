@@ -1,0 +1,11 @@
+{
+  "name": "TV Media Card",
+  "content_in_root": false,
+  "filename": "tv-media-card.js",
+  "homeassistant": "2024.1.0",
+  "documentation": "https://github.com/simabogdan1519-sketch/tv-media-card",
+  "issues": "https://github.com/simabogdan1519-sketch/tv-media-card/issues",
+  "requirements": [
+    "androidtv_remote"
+  ]
+}
