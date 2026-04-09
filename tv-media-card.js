@@ -314,6 +314,9 @@ const TV_CSS = `
   .vol-ic { color: rgba(255,255,255,.35); flex-shrink: 0; cursor: pointer; transition: color .2s; }
   .vol-ic:hover { color: rgba(255,255,255,.7); }
   .vol-ic svg { width: 14px; height: 14px; display: block; }
+  .vol-step { width: 26px; height: 26px; border-radius: 50%; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.04); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .2s; flex-shrink: 0; color: rgba(255,255,255,.4); font-size: 14px; font-weight: 600; line-height: 1; user-select: none; }
+  .vol-step:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.2); color: rgba(255,255,255,.8); }
+  .vol-step:active { transform: scale(.9); }
   .vbar { flex: 1; height: 3px; background: rgba(255,255,255,.08); border-radius: 2px; cursor: pointer; position: relative; }
   .vfill { height: 100%; background: linear-gradient(90deg, rgba(255,255,255,.3), rgba(255,255,255,.65)); border-radius: 2px; position: relative; width: 0%; transition: width .3s; }
   .vthumb { width: 10px; height: 10px; border-radius: 50%; background: #fff; position: absolute; right: -5px; top: 50%; transform: translateY(-50%); box-shadow: 0 0 4px rgba(255,255,255,.3); transition: transform .2s; }
@@ -581,7 +584,9 @@ class TvMediaCard extends HTMLElement {
               <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
             </svg>
           </div>
+          <button class="vol-step" id="volDown" aria-label="Volume Down">−</button>
           <div class="vbar" id="vbar"><div class="vfill" id="vfill"><div class="vthumb"></div></div></div>
+          <button class="vol-step" id="volUp" aria-label="Volume Up">+</button>
           <div class="vol-pct" id="volPct">0%</div>
         </div>
 
@@ -691,17 +696,23 @@ class TvMediaCard extends HTMLElement {
     });
 
     this._$('vbar').addEventListener('click', e => {
+      // Only use volume_set if the entity supports it
+      const features = this._hass?.states[this._cfg.entity]?.attributes?.supported_features || 0;
+      const supportsVolumeSet = !!(features & 4); // VOLUME_SET = 4
+      if (!supportsVolumeSet) return; // bar click does nothing if not supported
       const r   = e.currentTarget.getBoundingClientRect();
       let pct = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
       const steps = this._cfg.volume_steps;
       if (steps > 0) {
-        // Snap to nearest step
         const step = Math.round(pct * steps);
         pct = step / steps;
       }
       pct = +pct.toFixed(2);
       this._callMedia('volume_set', { volume_level: pct });
     });
+
+    this._$('volDown').addEventListener('click', () => this._callMedia('volume_down'));
+    this._$('volUp').addEventListener('click', () => this._callMedia('volume_up'));
 
     this._$('btnMute').addEventListener('click', () => {
       const muted = this._hass?.states[this._cfg.entity]?.attributes?.is_volume_muted ?? false;
