@@ -2,7 +2,7 @@
 
 A custom Home Assistant Lovelace card for controlling Android TV and media devices with a modern, intuitive interface. Displays a TV bezel visualization with playback controls, volume management, and quick app launcher.
 
-
+![preview](preview.png)
 
 ## Features
 
