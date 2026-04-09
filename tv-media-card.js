@@ -12,39 +12,42 @@
  *   name: Living Room TV                   # overrides friendly_name
  *   brand: SAMSUNG                         # shown on TV bezel
  *   language: ro                           # en ro de fr es it pl hu nl pt cs sk
+ *   apps:                                  # override default app list
+ *     - name: YouTube
+ *       id: com.google.android.youtube.tv
  *
  */
 
 // ─── I18N ─────────────────────────────────────────────────────────────────────
 const TV_I18N = {
-  en: { on:"On", off:"Off", standby:"STANDBY", nowPlaying:"Now Playing", settings:"Settings", cardSettings:"Card Settings", general:"General", roomName:"Room / Device Name", brand:"TV Brand", entity:"Media Player", appearance:"Appearance", lang:"Language", apply:"Apply", idle:"Idle", unavailable:"Unavailable", launchApp:"Launch App"},
-  ro: { on:"Pornit", off:"Oprit", standby:"STANDBY", nowPlaying:"Se redă acum", settings:"Setări", cardSettings:"Setări Card", general:"General", roomName:"Cameră / Dispozitiv", brand:"Brand TV", entity:"Media Player", appearance:"Aspect", lang:"Limbă", apply:"Aplică", idle:"Inactiv", unavailable:"Indisponibil", launchApp:"Lansează Aplicație"},
-  de: { on:"An", off:"Aus", standby:"STANDBY", nowPlaying:"Jetzt läuft", settings:"Einstellungen", cardSettings:"Karten-Einstellungen", general:"Allgemein", roomName:"Raum / Gerät", brand:"TV-Marke", entity:"Media Player", appearance:"Aussehen", lang:"Sprache", apply:"Anwenden", idle:"Inaktiv", unavailable:"Nicht verfügbar", launchApp:"App starten"},
-  fr: { on:"Allumé", off:"Éteint", standby:"VEILLE", nowPlaying:"En cours", settings:"Paramètres", cardSettings:"Paramètres carte", general:"Général", roomName:"Pièce / Appareil", brand:"Marque TV", entity:"Media Player", appearance:"Apparence", lang:"Langue", apply:"Appliquer", idle:"Inactif", unavailable:"Indisponible", launchApp:"Lancer App"},
-  es: { on:"Encendido", off:"Apagado", standby:"EN ESPERA", nowPlaying:"Reproduciendo", settings:"Ajustes", cardSettings:"Ajustes de tarjeta", general:"General", roomName:"Habitación / Dispositivo", brand:"Marca TV", entity:"Media Player", appearance:"Apariencia", lang:"Idioma", apply:"Aplicar", idle:"Inactivo", unavailable:"No disponible", launchApp:"Lanzar App"},
-  it: { on:"Acceso", off:"Spento", standby:"STANDBY", nowPlaying:"In riproduzione", settings:"Impostazioni", cardSettings:"Impostazioni scheda", general:"Generale", roomName:"Stanza / Dispositivo", brand:"Marca TV", entity:"Media Player", appearance:"Aspetto", lang:"Lingua", apply:"Applica", idle:"Inattivo", unavailable:"Non disponibile", launchApp:"Avvia App"},
-  pl: { on:"Włączony", off:"Wyłączony", standby:"CZUWANIE", nowPlaying:"Teraz odtwarzane", settings:"Ustawienia", cardSettings:"Ustawienia karty", general:"Ogólne", roomName:"Pokój / Urządzenie", brand:"Marka TV", entity:"Media Player", appearance:"Wygląd", lang:"Język", apply:"Zastosuj", idle:"Bezczynny", unavailable:"Niedostępny", launchApp:"Uruchom App"},
-  hu: { on:"Bekapcsolva", off:"Kikapcsolva", standby:"KÉSZENLÉT", nowPlaying:"Most játszik", settings:"Beállítások", cardSettings:"Kártya beállítások", general:"Általános", roomName:"Szoba / Eszköz", brand:"TV márka", entity:"Media Player", appearance:"Megjelenés", lang:"Nyelv", apply:"Alkalmaz", idle:"Tétlen", unavailable:"Nem elérhető", launchApp:"App indítása"},
-  nl: { on:"Aan", off:"Uit", standby:"STANDBY", nowPlaying:"Nu afspelen", settings:"Instellingen", cardSettings:"Kaartinstellingen", general:"Algemeen", roomName:"Kamer / Apparaat", brand:"TV-merk", entity:"Media Player", appearance:"Uiterlijk", lang:"Taal", apply:"Toepassen", idle:"Inactief", unavailable:"Niet beschikbaar", launchApp:"App starten"},
-  pt: { on:"Ligado", off:"Desligado", standby:"ESPERA", nowPlaying:"A reproduzir", settings:"Definições", cardSettings:"Definições do cartão", general:"Geral", roomName:"Sala / Dispositivo", brand:"Marca TV", entity:"Media Player", appearance:"Aparência", lang:"Idioma", apply:"Aplicar", idle:"Inativo", unavailable:"Indisponível", launchApp:"Lançar App"},
-  cs: { on:"Zapnuto", off:"Vypnuto", standby:"POHOTOVOST", nowPlaying:"Přehrává se", settings:"Nastavení", cardSettings:"Nastavení karty", general:"Obecné", roomName:"Místnost / Zařízení", brand:"Značka TV", entity:"Media Player", appearance:"Vzhled", lang:"Jazyk", apply:"Použít", idle:"Nečinný", unavailable:"Nedostupný", launchApp:"Spustit App"},
-  sk: { on:"Zapnuté", off:"Vypnuté", standby:"POHOTOVOSŤ", nowPlaying:"Práve hrá", settings:"Nastavenia", cardSettings:"Nastavenia karty", general:"Všeobecné", roomName:"Miestnosť / Zariadenie", brand:"Značka TV", entity:"Media Player", appearance:"Vzhľad", lang:"Jazyk", apply:"Použiť", idle:"Nečinný", unavailable:"Nedostupný", launchApp:"Spustiť App"},
+  en: { on:"On", off:"Off", standby:"STANDBY", nowPlaying:"Now Playing", settings:"Settings", cardSettings:"Card Settings", general:"General", roomName:"Room / Device Name", brand:"TV Brand", entity:"Media Player", appearance:"Appearance", lang:"Language", apply:"Apply", idle:"Idle", unavailable:"Unavailable", launchApp:"Launch App", edit:"Edit", done:"Done", add:"Add", cancel:"Cancel", appName:"App name", packageId:"Package ID"},
+  ro: { on:"Pornit", off:"Oprit", standby:"STANDBY", nowPlaying:"Se redă acum", settings:"Setări", cardSettings:"Setări Card", general:"General", roomName:"Cameră / Dispozitiv", brand:"Brand TV", entity:"Media Player", appearance:"Aspect", lang:"Limbă", apply:"Aplică", idle:"Inactiv", unavailable:"Indisponibil", launchApp:"Lansează Aplicație", edit:"Editează", done:"Gata", add:"Adaugă", cancel:"Anulează", appName:"Nume aplicație", packageId:"ID pachet"},
+  de: { on:"An", off:"Aus", standby:"STANDBY", nowPlaying:"Jetzt läuft", settings:"Einstellungen", cardSettings:"Karten-Einstellungen", general:"Allgemein", roomName:"Raum / Gerät", brand:"TV-Marke", entity:"Media Player", appearance:"Aussehen", lang:"Sprache", apply:"Anwenden", idle:"Inaktiv", unavailable:"Nicht verfügbar", launchApp:"App starten", edit:"Bearbeiten", done:"Fertig", add:"Hinzufügen", cancel:"Abbrechen", appName:"App-Name", packageId:"Paket-ID"},
+  fr: { on:"Allumé", off:"Éteint", standby:"VEILLE", nowPlaying:"En cours", settings:"Paramètres", cardSettings:"Paramètres carte", general:"Général", roomName:"Pièce / Appareil", brand:"Marque TV", entity:"Media Player", appearance:"Apparence", lang:"Langue", apply:"Appliquer", idle:"Inactif", unavailable:"Indisponible", launchApp:"Lancer App", edit:"Modifier", done:"Terminé", add:"Ajouter", cancel:"Annuler", appName:"Nom de l'app", packageId:"ID du paquet"},
+  es: { on:"Encendido", off:"Apagado", standby:"EN ESPERA", nowPlaying:"Reproduciendo", settings:"Ajustes", cardSettings:"Ajustes de tarjeta", general:"General", roomName:"Habitación / Dispositivo", brand:"Marca TV", entity:"Media Player", appearance:"Apariencia", lang:"Idioma", apply:"Aplicar", idle:"Inactivo", unavailable:"No disponible", launchApp:"Lanzar App", edit:"Editar", done:"Listo", add:"Añadir", cancel:"Cancelar", appName:"Nombre de app", packageId:"ID de paquete"},
+  it: { on:"Acceso", off:"Spento", standby:"STANDBY", nowPlaying:"In riproduzione", settings:"Impostazioni", cardSettings:"Impostazioni scheda", general:"Generale", roomName:"Stanza / Dispositivo", brand:"Marca TV", entity:"Media Player", appearance:"Aspetto", lang:"Lingua", apply:"Applica", idle:"Inattivo", unavailable:"Non disponibile", launchApp:"Avvia App", edit:"Modifica", done:"Fatto", add:"Aggiungi", cancel:"Annulla", appName:"Nome app", packageId:"ID pacchetto"},
+  pl: { on:"Włączony", off:"Wyłączony", standby:"CZUWANIE", nowPlaying:"Teraz odtwarzane", settings:"Ustawienia", cardSettings:"Ustawienia karty", general:"Ogólne", roomName:"Pokój / Urządzenie", brand:"Marka TV", entity:"Media Player", appearance:"Wygląd", lang:"Język", apply:"Zastosuj", idle:"Bezczynny", unavailable:"Niedostępny", launchApp:"Uruchom App", edit:"Edytuj", done:"Gotowe", add:"Dodaj", cancel:"Anuluj", appName:"Nazwa aplikacji", packageId:"ID pakietu"},
+  hu: { on:"Bekapcsolva", off:"Kikapcsolva", standby:"KÉSZENLÉT", nowPlaying:"Most játszik", settings:"Beállítások", cardSettings:"Kártya beállítások", general:"Általános", roomName:"Szoba / Eszköz", brand:"TV márka", entity:"Media Player", appearance:"Megjelenés", lang:"Nyelv", apply:"Alkalmaz", idle:"Tétlen", unavailable:"Nem elérhető", launchApp:"App indítása", edit:"Szerkesztés", done:"Kész", add:"Hozzáadás", cancel:"Mégse", appName:"App neve", packageId:"Csomag ID"},
+  nl: { on:"Aan", off:"Uit", standby:"STANDBY", nowPlaying:"Nu afspelen", settings:"Instellingen", cardSettings:"Kaartinstellingen", general:"Algemeen", roomName:"Kamer / Apparaat", brand:"TV-merk", entity:"Media Player", appearance:"Uiterlijk", lang:"Taal", apply:"Toepassen", idle:"Inactief", unavailable:"Niet beschikbaar", launchApp:"App starten", edit:"Bewerken", done:"Klaar", add:"Toevoegen", cancel:"Annuleren", appName:"App-naam", packageId:"Pakket-ID"},
+  pt: { on:"Ligado", off:"Desligado", standby:"ESPERA", nowPlaying:"A reproduzir", settings:"Definições", cardSettings:"Definições do cartão", general:"Geral", roomName:"Sala / Dispositivo", brand:"Marca TV", entity:"Media Player", appearance:"Aparência", lang:"Idioma", apply:"Aplicar", idle:"Inativo", unavailable:"Indisponível", launchApp:"Lançar App", edit:"Editar", done:"Pronto", add:"Adicionar", cancel:"Cancelar", appName:"Nome da app", packageId:"ID do pacote"},
+  cs: { on:"Zapnuto", off:"Vypnuto", standby:"POHOTOVOST", nowPlaying:"Přehrává se", settings:"Nastavení", cardSettings:"Nastavení karty", general:"Obecné", roomName:"Místnost / Zařízení", brand:"Značka TV", entity:"Media Player", appearance:"Vzhled", lang:"Jazyk", apply:"Použít", idle:"Nečinný", unavailable:"Nedostupný", launchApp:"Spustit App", edit:"Upravit", done:"Hotovo", add:"Přidat", cancel:"Zrušit", appName:"Název aplikace", packageId:"ID balíčku"},
+  sk: { on:"Zapnuté", off:"Vypnuté", standby:"POHOTOVOSŤ", nowPlaying:"Práve hrá", settings:"Nastavenia", cardSettings:"Nastavenia karty", general:"Všeobecné", roomName:"Miestnosť / Zariadenie", brand:"Značka TV", entity:"Media Player", appearance:"Vzhľad", lang:"Jazyk", apply:"Použiť", idle:"Nečinný", unavailable:"Nedostupný", launchApp:"Spustiť App", edit:"Upraviť", done:"Hotovo", add:"Pridať", cancel:"Zrušiť", appName:"Názov aplikácie", packageId:"ID balíčka"},
 };
 
 // ─── APP LOGOS ────────────────────────────────────────────────────────────────
 const _LOGOS = {
-  youtube   : () => `<svg height="48" viewBox="0 0 24 17" xmlns="http://www.w3.org/2000/svg"><path fill="#FF0000" d="M23.5 2.7a3 3 0 0 0-2.1-2.1C19.5 0 12 0 12 0S4.5 0 2.6.6A3 3 0 0 0 .5 2.7C0 4.6 0 8.5 0 8.5s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1C4.5 17 12 17 12 17s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 12.4 24 8.5 24 8.5s0-3.9-.5-5.8z"/><path fill="#fff" d="M9.5 12.1V4.9l6.3 3.6-6.3 3.6z"/></svg>`,
-  netflix   : () => `<svg height="48" viewBox="0 0 512 138" xmlns="http://www.w3.org/2000/svg"><path fill="#DB202C" d="M340.657183,0 L340.657183,100.203061 C353.016406,100.778079 365.344207,101.473198 377.637095,102.293306 L377.637095,123.537553 C358.204486,122.242243 338.690182,121.253471 319.094879,120.57923 L319.094879,0 L340.657183,0 Z M512,0.0118710746 L483.922918,65.1060972 L511.993017,137.54371 L511.961595,137.557485 C503.784957,136.3909 495.597845,135.289637 487.386294,134.233936 L471.623048,93.5776798 L455.709676,130.459835 C448.168455,129.627123 440.61676,128.839275 433.047609,128.100899 L460.419447,64.6708546 L435.351871,0.0118710746 L458.677285,0.0118710746 L472.712335,36.1957639 L488.318473,0.0118710746 L512,0.0118710746 Z M245.093161,119.526252 L245.092462,0.0114869428 L305.282574,0.0114869428 L305.282574,21.4467074 L266.654767,21.4467074 L266.654767,49.2277266 L295.881884,49.2277266 L295.881884,70.4719734 L266.654767,70.4719734 L266.654767,119.521329 L245.093161,119.526252 Z M164.580156,21.448488 L164.579458,0.0103695593 L231.270382,0.0103695593 L231.270382,21.4469875 L208.705375,21.4469875 L208.705375,120.107799 C201.508397,120.296154 194.3191,120.519389 187.144466,120.790104 L187.144466,21.448488 L164.580156,21.448488 Z M90.8682168,126.966224 L90.8682168,0.0139657936 L150.758077,0.0139657936 L150.758077,21.4491862 L112.42703,21.4491862 L112.42703,50.4849807 C121.233151,50.3722116 133.754021,50.2444297 141.543822,50.2632828 L141.543822,71.5092753 C131.792954,71.388127 120.786264,71.6429923 112.42703,71.7264345 L112.42703,103.88974 C125.166805,102.887736 137.944984,102.011069 150.758077,101.270912 L150.758077,122.517253 C130.704017,123.672422 110.740031,125.160591 90.8682168,126.966224 Z M48.5710466,77.8540254 L48.5696502,0.0104745953 L70.1319549,0.0104745953 L70.1319549,128.968837 C62.2496338,129.779728 54.3823252,130.642465 46.5286328,131.553346 L21.5609083,59.8244682 L21.5609083,134.625696 C14.3597408,135.563565 7.17323695,136.54141 0,137.562338 L0,0.0118710746 L20.4911722,0.0118710746 L48.5710466,77.8540254 Z M395.425298,124.819071 L395.425298,0.0120101224 L416.987603,0.0120101224 L416.987603,126.599777 C409.809478,125.960833 402.624371,125.369895 395.425298,124.819071 Z"/></svg>`,
-  plex      : () => `<svg height="48" viewBox="0 0 3086 1000" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="pg" cx="1244.351" cy="920.081" r=".925" gradientTransform="matrix(610 0 0 -1000.5 -756323.625 921038.75)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f9be03"/><stop offset="1" stop-color="#cc7c19"/></radialGradient></defs><path fill="#aaa" d="M3085.99 0h-290.001L2505.99 500l289.999 500h289.748l-289.748-499.75L3085.99 0"/><path fill="url(#pg)" d="M2186 0h290l320 500.25-320 500.25h-290l319.999-500.25L2186 0"/><path fill="#aaa" d="M2085.947 1000h-577.073V0h577.073v173.737H1721.34v219.562h339.255V567.03H1721.34v257.864h364.607V1000M791.276 1000V0h212.04v824.895h405.609V1000H791.276M589.947 558.824c-67.268 57.007-162.91 85.501-286.938 85.501H212.04V1000H0V470.338l290 .359c177.562-2.069 186.842-110.818 186.842-148.497 0-34.979 0-146.755-157.842-148.5l-319 .003V0h319.424c121.293 0 213.515 26.107 276.677 78.321 63.152 52.213 94.733 130.071 94.733 233.581 0 107.625-33.633 189.928-100.887 246.922z"/><path fill="#aaa" d="M0 110h212.2v429H0z"/></svg>`,
-  disney    : () => `<svg height="48" viewBox="0 0 96 48" xmlns="http://www.w3.org/2000/svg"><rect width="96" height="48" rx="8" fill="#00308F"/><text x="8" y="34" font-family="Georgia,Times New Roman,serif" font-style="italic" font-weight="700" font-size="30" fill="#fff">Disney</text><text x="71" y="18" font-family="Arial,sans-serif" font-weight="900" font-size="18" fill="#00A8E0">+</text></svg>`,
-  prime     : () => `<svg height="48" viewBox="0 0 90 44" xmlns="http://www.w3.org/2000/svg"><text x="2" y="26" font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="22" fill="#fff" letter-spacing="-0.5">prime</text><text x="2" y="40" font-family="Arial,sans-serif" font-weight="400" font-size="13" fill="#00A8E0" letter-spacing="2">video</text><path d="M66 32 Q76 38 86 32" fill="none" stroke="#00A8E0" stroke-width="2.5" stroke-linecap="round"/><polygon points="83,27 88,32 83,37" fill="#00A8E0"/></svg>`,
-  appletv   : () => `<svg height="48" viewBox="0 0 96 48" xmlns="http://www.w3.org/2000/svg"><rect width="96" height="48" rx="8" fill="#1c1c1e"/><path d="M19 15c-1.4 0-2.7.8-3.4 2-.7-1.2-2-2-3.4-2-2.1 0-3.8 1.7-3.8 3.8 0 4.2 7.2 8.7 7.2 8.7s7.2-4.5 7.2-8.7c0-2.1-1.7-3.8-3.8-3.8z" fill="#fff"/><path d="M16.5 12.5c.3-1.4 1.4-2.4 2.5-2.9" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/><text x="33" y="32" font-family="SF Pro,Helvetica Neue,Arial,sans-serif" font-weight="200" font-size="24" fill="#fff" letter-spacing="2">TV</text></svg>`,
-  spotify   : () => `<svg height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="23" fill="#1DB954"/><path fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" d="M12,18 Q24,13 36,18"/><path fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" d="M13.5,25 Q24,20.5 34.5,25"/><path fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" d="M15,32 Q24,28 33,32"/></svg>`,
-  twitch    : () => `<svg height="48" viewBox="-6 0 268 268" xmlns="http://www.w3.org/2000/svg"><path fill="#9146FF" d="M17.4579119,0 L0,46.5559188 L0,232.757287 L63.9826001,232.757287 L63.9826001,267.690956 L98.9144853,267.690956 L133.811571,232.757287 L186.171922,232.757287 L256,162.954193 L256,0 L17.4579119,0 Z M40.7166868,23.2632364 L232.73141,23.2632364 L232.73141,151.29179 L191.992415,192.033461 L128,192.033461 L93.11273,226.918947 L93.11273,192.033461 L40.7166868,192.033461 L40.7166868,23.2632364 Z M104.724985,139.668381 L127.999822,139.668381 L127.999822,69.843872 L104.724985,69.843872 L104.724985,139.668381 Z M168.721862,139.668381 L191.992237,139.668381 L191.992237,69.843872 L168.721862,69.843872 L168.721862,139.668381 Z"/></svg>`,
-  max       : () => `<svg height="48" viewBox="0 7 24 10" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M7.042 16.896H4.414v-3.754H2.708v3.754H.01L0 7.22h2.708v3.6h1.706v-3.6h2.628zm12.043.046C21.795 16.94 24 14.689 24 11.978a4.89 4.89 0 0 0-4.915-4.92c-2.707-.002-4.09 1.991-4.432 2.795.003-1.207-1.187-2.632-2.58-2.634H7.59v9.674l4.181.001c1.686 0 2.886-1.46 2.888-2.713.385.788 1.72 2.762 4.427 2.76zm-7.665-3.936c.387 0 .692.382.692.817 0 .435-.305.817-.692.817h-1.33v-1.634zm.005-3.633c.387 0 .692.382.692.817 0 .436-.305.818-.692.818h-1.33V9.373zm1.77 2.607c.305-.039.813-.387.992-.61-.063.276-.068 1.074.006 1.35-.204-.314-.688-.701-.998-.74zm3.43 0a2.462 2.462 0 1 1 4.924 0 2.462 2.462 0 0 1-4.925 0zm2.462 1.936a1.936 1.936 0 1 0 0-3.872 1.936 1.936 0 0 0 0 3.872z"/></svg>`,
-  hulu      : () => `<svg height="48" viewBox="0 0 115 48" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#1CE783" stroke-width="5.5" stroke-linecap="round" d="M8,6 L8,42 M8,26 Q8,18 17,18 Q25,18 25,25 L25,42"/><path fill="none" stroke="#1CE783" stroke-width="5.5" stroke-linecap="round" d="M33,18 L33,32 Q33,42 42,42 Q51,42 51,32 L51,18"/><line x1="59" y1="6" x2="59" y2="42" stroke="#1CE783" stroke-width="5.5" stroke-linecap="round"/><path fill="none" stroke="#1CE783" stroke-width="5.5" stroke-linecap="round" d="M67,18 L67,32 Q67,42 76,42 Q85,42 85,32 L85,18"/><circle cx="98" cy="39" r="4.5" fill="#1CE783"/></svg>`,
-  dazn      : () => `<svg height="48" viewBox="0 0 130 48" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#fff" stroke-width="4.5" stroke-linejoin="round" d="M6,6 L6,42 L14,42 Q28,42 28,24 Q28,6 14,6 Z"/><path fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" d="M38,42 L48,6 L58,42 M41,30 L55,30"/><path fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" d="M66,6 L82,6 L66,42 L82,42"/><path fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" d="M90,42 L90,6 L106,42 L106,6"/></svg>`,
-  videoland : () => `<svg height="48" viewBox="0 0 155 48" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="46" height="46" rx="10" fill="#E4002B"/><polygon points="15,10 15,38 38,24" fill="#fff"/><path fill="none" stroke="#E4002B" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M56,8 L66,40 L76,8"/><rect x="83" y="8" width="4.5" height="32" rx="2" fill="#E4002B"/><circle cx="85" cy="3" r="3" fill="#E4002B"/><path fill="none" stroke="#E4002B" stroke-width="4.5" stroke-linecap="round" d="M100,2 L100,40 M100,28 Q100,12 110,12 Q120,12 120,26 Q120,40 110,40 Z"/></svg>`,
+  youtube   : () => `<svg viewBox="0 -7 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>Youtube-color</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Color-" transform="translate(-200.000000, -368.000000)" fill="#CE1312"> <path d="M219.044,391.269916 L219.0425,377.687742 L232.0115,384.502244 L219.044,391.269916 Z M247.52,375.334163 C247.52,375.334163 247.0505,372.003199 245.612,370.536366 C243.7865,368.610299 241.7405,368.601235 240.803,368.489448 C234.086,368 224.0105,368 224.0105,368 L223.9895,368 C223.9895,368 213.914,368 207.197,368.489448 C206.258,368.601235 204.2135,368.610299 202.3865,370.536366 C200.948,372.003199 200.48,375.334163 200.48,375.334163 C200.48,375.334163 200,379.246723 200,383.157773 L200,386.82561 C200,390.73817 200.48,394.64922 200.48,394.64922 C200.48,394.64922 200.948,397.980184 202.3865,399.447016 C204.2135,401.373084 206.612,401.312658 207.68,401.513574 C211.52,401.885191 224,402 224,402 C224,402 234.086,401.984894 240.803,401.495446 C241.7405,401.382148 243.7865,401.373084 245.612,399.447016 C247.0505,397.980184 247.52,394.64922 247.52,394.64922 C247.52,394.64922 248,390.73817 248,386.82561 L248,383.157773 C248,379.246723 247.52,375.334163 247.52,375.334163 L247.52,375.334163 Z" id="Youtube"> </path> </g> </g> </g></svg>`,
+  netflix   : () => `<svg viewBox="0 -187 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M340.657183,0 L340.657183,100.203061 C353.016406,100.778079 365.344207,101.473198 377.637095,102.293306 L377.637095,123.537553 C358.204486,122.242243 338.690182,121.253471 319.094879,120.57923 L319.094879,0 L340.657183,0 Z M512,0.0118710746 L483.922918,65.1060972 L511.993017,137.54371 L511.961595,137.557485 C503.784957,136.3909 495.597845,135.289637 487.386294,134.233936 L471.623048,93.5776798 L455.709676,130.459835 C448.168455,129.627123 440.61676,128.839275 433.047609,128.100899 L460.419447,64.6708546 L435.351871,0.0118710746 L458.677285,0.0118710746 L472.712335,36.1957639 L488.318473,0.0118710746 L512,0.0118710746 Z M245.093161,119.526252 L245.092462,0.0114869428 L305.282574,0.0114869428 L305.282574,21.4467074 L266.654767,21.4467074 L266.654767,49.2277266 L295.881884,49.2277266 L295.881884,70.4719734 L266.654767,70.4719734 L266.654767,119.521329 L245.093161,119.526252 Z M164.580156,21.448488 L164.579458,0.0103695593 L231.270382,0.0103695593 L231.270382,21.4469875 L208.705375,21.4469875 L208.705375,120.107799 C201.508397,120.296154 194.3191,120.519389 187.144466,120.790104 L187.144466,21.448488 L164.580156,21.448488 Z M90.8682168,126.966224 L90.8682168,0.0139657936 L150.758077,0.0139657936 L150.758077,21.4491862 L112.42703,21.4491862 L112.42703,50.4849807 C121.233151,50.3722116 133.754021,50.2444297 141.543822,50.2632828 L141.543822,71.5092753 C131.792954,71.388127 120.786264,71.6429923 112.42703,71.7264345 L112.42703,103.88974 C125.166805,102.887736 137.944984,102.011069 150.758077,101.270912 L150.758077,122.517253 C130.704017,123.672422 110.740031,125.160591 90.8682168,126.966224 Z M48.5710466,77.8540254 L48.5696502,0.0104745953 L70.1319549,0.0104745953 L70.1319549,128.968837 C62.2496338,129.779728 54.3823252,130.642465 46.5286328,131.553346 L21.5609083,59.8244682 L21.5609083,134.625696 C14.3597408,135.563565 7.17323695,136.54141 0,137.562338 L0,0.0118710746 L20.4911722,0.0118710746 L48.5710466,77.8540254 Z M395.425298,124.819071 L395.425298,124.819211 L395.425298,0.0120101224 L416.987603,0.0120101224 L416.987603,126.599777 C409.809478,125.960833 402.624371,125.369895 395.425298,124.819071 Z" fill="#DB202C" fill-rule="nonzero"> </path> </g> </g></svg>`,
+  plex      : () => `<svg viewBox="0 -1043 3086 3086" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title>plex-logo-light</title><path fill="#cccccc" d="M3085.99 0h-290.001L2505.99 500l289.999 500h289.748l-289.748-499.75L3085.99 0"></path><radialGradient id="plex-grad" cx="1244.351" cy="920.081" r=".925" gradientTransform="matrix(610 0 0 -1000.5 -756323.625 921038.75)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f9be03"></stop><stop offset="1" stop-color="#cc7c19"></stop></radialGradient><path fill="url(#plex-grad)" d="M2186 0h290l320 500.25-320 500.25h-290l319.999-500.25L2186 0"></path><path fill="#cccccc" d="M2085.947 1000h-577.073V0h577.073v173.737H1721.34v219.562h339.255V567.03H1721.34v257.864h364.607V1000M791.276 1000V0h212.04v824.895h405.609V1000H791.276M589.947 558.824c-67.268 57.007-162.91 85.501-286.938 85.501H212.04V1000H0V470.338l290 .359c177.562-2.069 186.842-110.818 186.842-148.497 0-34.979 0-146.755-157.842-148.5l-319 .003V0h319.424c121.293 0 213.515 26.107 276.677 78.321 63.152 52.213 94.733 130.071 94.733 233.581 0 107.625-33.633 189.928-100.887 246.922z"></path><path fill="#cccccc" d="M0 110h212.2v429H0z"></path></g></svg>`,
+  disney    : () => `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#fff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g transform="matrix(.02 0 0 .02 .658 6.921)"> <linearGradient id="disney-grad" x1="930.503" x2="189.496" y1="184.483" y2="84.295" gradientUnits="userSpaceOnUse"> <stop offset="0" style="stop-color:#101c50"></stop> <stop offset=".236" style="stop-color:#0d267a"></stop> <stop offset=".497" style="stop-color:#085aa4"></stop> <stop offset=".655" style="stop-color:#058bbf"></stop> <stop offset="1" style="stop-color:#b1ffff"></stop> </linearGradient> <path fill="#101c50" d="M453.988 377.341c.553.076.673.098 1.212.168 9.006 1.224 17.856 2.847 24.63 5.875 6.278 2.772 9.958 6.28 13.318 12.533 5.109 9.482 5.442 22.766.825 32.82-3.449 7.481-11.02 13.754-17.932 17.079-7.178 3.48-14.25 5.137-22.361 6.063-14.186 1.562-29.507-1.377-42.272-7.551-7.552-3.688-16.774-10.039-21.426-18.221-3.421-5.994-3.312-13.793.85-19.49 6.634-9.08 20.843-11.079 31.545-10.7 8.159.316 22.85 2.838 30.597 5.594 2.147.776 10.066 3.861 11.448 5.276.973.984 1.604 2.414 1.167 3.736-1.77 5.414-14.926 8.268-18.725 8.841-10.17 1.558-15.447-2.291-27.009-6.856-2.87-1.124-6.695-2.371-9.617-2.641-5.249-.5-11.589.97-12.591 6.7-.498 2.953 2.965 5.715 5.606 6.876 6.202 2.664 11.244 3.622 17.348 3.704 18.032.297 38.297-2.672 53.046-13.122 2.019-1.441 4.002-3.55 4.023-6.209.064-5.369-9.349-8.652-9.349-8.652-9.935-4.142-28.292-6.158-37.749-6.937-9.924-.859-25.539-2.144-29.288-2.696-3.86-.551-8.053-1.33-11.396-2.828-3.358-1.517-6.643-4.912-7.618-8.668-1.729-6.771.477-15.079 4.237-20.488 9.855-14.168 32.94-19.549 50.186-21.686 16.692-2.077 43.677-2.056 60.072 6.656 2.531 1.357 3.824 2.619 3.295 5.325-1.068 5.08-4.886 8.354-9.514 9.789-4.855 1.545-14.898 2.147-19.309 2.425-19.766 1.108-43.652.527-62.479 5.661-1.475.421-4.023 1.108-4.851 2.033-2.947 3.199 5.47 4.113 7.273 4.479.536.128.64.146 1.199.207l41.609 4.905m-117.589-88.137s3.215-4.822 5.909-8.48c4.905-6.662 13.782-15.901 20.467-21.621 2.045-1.747 4.456-3.726 4.456-3.726s-3.771.39-5.908.827c-5.072.987-12.509 5.93-16.225 9.124-6.132 5.249-12.875 13.782-9.824 21.364.443 1.071 1.125 2.512 1.125 2.512m34.088 9.122c9.687-.668 18.761-3.457 27.209-8.143 8.285-4.636 20.471-13.676 19.207-24.303-.384-3.44-2.636-6.037-5.479-7.249-3.695-1.601-5.622-1.343-10.342.06-3.429 1.003-4.974 1.612-8.212 3.465-9.503 5.521-22.977 17.337-30.292 26.767-1.688 2.224-3.398 4.711-4.736 6.416-.844 1.051-1.5 2.016-1.418 2.273.292 1.069 10.28.971 14.063.714m-24.664 18.116c-.999 1.057-2.056 3.605-3.152 5.45-.586.987-1.671 2.258-2.389 2.768-2.521 1.854-4.657 1.94-7.091-.202-3.413-3.019-5.387-7.688-5.527-12.23-.073-1.982.267-4.175-.108-5.846-.621-2.821-3.444-5.727-4.966-8.424-1.787-3.177-3.233-8.717-3.413-12.294-.613-11.153 5.266-21.427 12.903-29.53 7.691-8.194 17.753-15.004 28.696-19.64 10.344-4.357 25.502-7.327 36.861-3.393 3.698 1.267 8.85 4.414 11.439 7.711.55.684.998 1.424 1.562 1.786.505.322 1.826.449 2.877.642 3.623.628 8.839 3.371 10.97 5.198 4.281 3.693 6.626 7.223 7.711 12.346 2.176 10.308-3.76 21.617-10.521 28.5-11.577 11.846-23.01 20.175-37.82 25.973-6.505 2.541-16.636 4.915-24.016 4.251-2.292-.19-4.646-.794-6.878-.942-1.139-.098-5.303-1.172-5.748-1.475-.552-.424-1.265-.793-1.39-.649m13.227 22.854c.451.076 1.146.278 1.744.508 5.192 1.975 7.328 6.78 8.607 12.058 2.964 12.256 4.229 39.37 4.722 49.983.362 7.966.561 15.803.895 23.677.283 6.668.815 15.533-.575 21.78-.505 2.247-2.008 4.86-4.16 6.198-2.465 1.578-8.076 1.698-11.16 1.062-7.602-1.572-10.072-6.46-11.157-13.978-2.579-17.939-1.337-53.146.185-68.002.506-4.907 2.354-20.629 4.916-27.221.875-2.223 2.738-6.7 5.983-6.065m-231.264 29.847s-11.314.801-19.101 1.665c-9.907 1.067-28.522 4.281-39.267 8.118-3.223 1.154-9.77 3.894-10.339 7.208-.598 3.435 1.534 6.121 3.905 8.9 1.371 1.614 9.131 9.079 11.307 10.893 9.121 7.615 27.616 19.359 41.238 25.062 4.68 1.936 12.422 4.708 12.422 4.708s-.575-22.044-.472-43.758c.06-11.455.307-22.796.307-22.796m207.454 8.773c.648 5.922-.874 17.119-1.138 18.596-.482 3.404-3.049 11.256-3.475 12.214-2.072 4.772-4.115 8.682-6.28 12.582-3.71 6.677-12.532 17.262-17.769 21.792-19.475 16.833-49.623 26.417-75.487 29.574-17.55 2.12-37.716 1.809-56.312-1.632-6.4-1.164-15.924-3.359-15.924-3.359s.031 3.808-.274 6.486c-.148 1.222-1.068 4.438-1.584 5.48-1.352 2.793-3.572 4.234-6.8 4.854-3.896.723-8.028.964-11.628-.575-5.911-2.487-8.033-8.017-9.063-14.395-.833-5.101-1.705-13.968-1.705-13.968s-4.422-2.094-8.109-3.934c-11.325-5.58-22.081-12.341-31.491-19.294-2.607-1.946-13.807-11.326-16.279-13.655-6.932-6.581-13.168-13.128-17.912-21.529-3.688-6.563-4.75-12.388-1.945-19.342 3.868-9.693 17.765-16.991 27.276-21.15 6.981-3.082 28.688-10.17 37.705-11.484 4.259-.609 10.865-1.792 11.271-2.056.166-.127.281-.235.401-.372.208-.293.559-9.888.491-13.398-.088-3.451 2.554-26.117 3.403-30.91.443-2.592 2.406-12.57 4.41-15.189 1.311-1.77 3.629-1.627 5.519-.465 10.342 6.431 13.484 28.734 14.253 40.082.46 6.914.689 17.314.689 17.314s11.864-.351 19.162-.144c7.092.165 14.909 1.284 22.27 2.457 9.424 1.511 27.793 5.518 38.328 10.859 8.675 4.398 16.795 11.808 19.426 19.65 2.444 7.189 2.078 12.164-1.645 18.652-4.186 7.326-12.104 12.771-20.132 13.226-2.389.138-11.381-1.057-14.148-3.199-1.085-.854-1.029-2.395-.246-3.44.297-.367 4.5-2.602 6.981-3.906a16.07 16.07 0 0 0 3.244-2.29c2.061-1.815 3.916-3.813 3.709-6.155-.285-3.04-3.502-4.915-6.568-6.121-14.386-5.715-43.109-10.459-56.989-11.28-5.433-.319-13.161-.592-13.161-.592l1.634 76.646s6.389 1.217 11.424 2.033c2.889.438 15.13 1.54 18.383 1.62 24.768.654 52.412-1.564 75.142-12.29 9.979-4.696 19.134-10.543 26.065-18.458 9.135-10.473 13.919-24.806 12.653-39.777-1.388-16.35-12.895-35.759-22.084-47.577-24.279-31.223-65.896-56.907-102.51-71.965-37.38-15.363-74.324-24.201-113.995-25.681-10.227-.379-32.526.137-43.798 3.255-1.61.454-3.233.996-4.728 1.332-1.181.289-3.042 1.071-3.553 1.484a5.536 5.536 0 0 0-.563.546s.695.384 1.359.665c1.194.521 6.22.833 8.821 1.309 2.327.438 4.75 1.66 5.709 3.365.911 1.621 1.025 2.899-.064 4.251-2.554 3.106-12.167 2.582-16.4 1.912-4.399-.701-9.876-2.047-10.882-5.877-1.167-4.511.976-8.933 3.291-13.021 4.651-8.179 11.313-12.433 21.069-15.097 13.857-3.813 31.354-6.479 44.439-6.979 29.616-1.119 57.646 4.06 86.341 12.772 16.423 4.966 37.924 13.299 53.665 20.878 11.295 5.446 29.091 15.461 39.088 22.006 3.153 2.081 21.604 15.638 24.47 18.021 5.979 4.888 13.799 11.914 19.462 17.533 10.956 10.857 24.583 27.499 31.203 40.708 1.593 3.163 2.827 6.275 4.882 9.941.707 1.256 3.731 8.768 4.234 10.938.498 2.147 1.228 5.303 1.331 5.428.146 1.153 1.548 7.607 1.438 10.095m372.323-16.947c-13.869 3.198-50.34 4.974-50.34 4.974l-4.599 14.406s18.226-1.556 31.485-.171c0 0 4.296-.499 4.801 4.877.171 5.014-.426 10.394-.426 10.394s-.275 3.255-4.888 4.083c-4.999.833-39.284 2.159-39.284 2.159l-5.552 18.778s-2.063 4.341 2.561 3.102c4.296-1.15 40.22-7.891 44.899-6.921 5.014 1.245 10.563 7.93 8.959 14.022-1.912 7.551-37.767 30.418-59.602 28.822 0 0-11.474.74-21.172-14.745-9.032-14.756 3.423-42.696 3.423-42.696s-5.709-13.043-1.572-17.464c0 0 2.462-2.234 9.639-2.739l8.788-18.181s-10.01.689-15.965-6.675c-5.547-6.986-6.012-10.197-1.759-12.126 4.548-2.246 46.234-9.854 74.919-8.889 0 0 9.969-.979 18.615 16.313.002.001 4.19 6.994-2.93 8.677m-107.891 69.906c-3.676 8.647-13.387 17.875-25.451 12.139-11.909-5.748-30.878-44.572-30.878-44.572s-7.201-14.477-8.586-14.104c0 0-1.556-2.827-2.51 12.993-.992 15.753.191 46.47-6.093 51.305-5.953 4.848-13.161 2.918-16.899-2.746-3.398-5.58-4.812-18.839-2.958-42.126 2.179-23.332 7.599-48.156 14.524-55.886 6.915-7.678 12.467-2.104 14.631-.082 0 0 9.25 8.384 24.504 33.003l2.692 4.554s13.862 23.259 15.31 23.205c0 0 1.133 1.069 2.143.301 1.455-.416.868-7.874.868-7.874s-2.876-25.348-15.522-68.252c0 0-1.912-5.35-.619-10.363 1.284-5.066 6.362-2.688 6.362-2.688s19.6 9.855 29.114 41.766c9.451 31.921 3.1 60.715-.632 69.427m210.945-19.112c-8.922 15.567-34.11 48.163-67.584 40.467-11.054 26.806-20.34 53.923-25.65 94.499 0 0-1.167 7.885-7.72 5.146-6.494-2.273-17.191-13.07-19.355-28.007-2.328-19.621 6.407-52.79 24.26-90.823-5.207-8.465-8.757-20.559-5.718-37.78 0 0 4.484-31.979 36.601-60.802 0 0 3.85-3.325 6.082-2.301 2.459 1.031 1.32 11.437-.631 16.497-2.027 5.031-16.325 29.784-16.325 29.784s-8.919 16.723-6.409 29.913c16.844-25.897 55.134-78.119 78.867-61.651 7.972 5.704 11.647 18.111 11.647 31.48.005 11.743-2.827 24.224-8.065 33.578m-6.926-41.014s-1.321-10.296-11.387 1.047c-8.658 9.572-24.274 27.506-36.845 51.865 13.19-1.481 25.912-8.637 29.759-12.282 6.254-5.549 20.823-20.604 18.473-40.63m191.327-2.344H933.67c-1.223-20.851-3.74-41.162-7.697-62.08a4.57 4.57 0 0 0-4.483-3.735h-14.143a4.14 4.14 0 0 0-3.194 1.518 4.177 4.177 0 0 0-.878 3.451c4.019 20.242 6.564 40.165 7.82 60.866h-59.021c-2.75 0-4.984 2.227-4.984 4.966v12.756a4.994 4.994 0 0 0 4.984 4.988h59.866c.038 3.148.069 5.967.069 8.612 0 18.384-.793 33.528-2.646 50.618a4.571 4.571 0 0 0 1.181 3.605 4.581 4.581 0 0 0 3.417 1.534h13.117a4.953 4.953 0 0 0 4.938-4.475c1.792-17.206 2.56-32.538 2.56-51.283 0-2.635-.028-5.464-.067-8.612h60.51c2.743 0 4.982-2.243 4.982-4.988V373.39a4.992 4.992 0 0 0-4.983-4.985" style="fill:#fff;fill-opacity:1" transform="translate(67.084 -26.834)"></path> <path fill="url(#disney-grad)" d="M174.713 197.472a4.938 4.938 0 0 0-.58 4.366 5.055 5.055 0 0 0 3.118 3.129l10.997 3.701a6.61 6.61 0 0 0 1.974.317 6.114 6.114 0 0 0 5.084-2.703c36.022-52.919 84.774-96.98 140.994-127.42 58.04-31.43 123.799-48.055 190.188-48.055 80.188 0 157.558 23.654 223.751 68.4 64.587 43.646 114.747 104.54 145.059 176.101a5.763 5.763 0 0 0 5.315 3.523h13.134a4.592 4.592 0 0 0 3.792-2.027 4.566 4.566 0 0 0 .45-4.284c-31.256-76.943-84.11-142.534-152.869-189.657C694.732 34.62 612.214 9.115 526.488 9.115c-141.721 0-273.23 70.416-351.775 188.357" style="fill:#fff;fill-opacity:1" transform="translate(67.084 -26.834)"></path> </g> </g></svg>`,
+  prime     : () => `<svg fill="#00A8E1" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M1.805 12.403c-.07-.096-.144-.175-.144-.354v-.594c0-.253.018-.484-.168-.658-.146-.14-.389-.19-.575-.19-.363 0-.769.136-.854.585-.009.047.026.072.057.08l.37.04c.035-.002.06-.036.067-.07.032-.155.161-.23.307-.23.079 0 .168.03.214.099.054.079.047.186.047.277v.05c-.222.024-.511.041-.719.132a.649.649 0 0 0-.407.624c0 .397.25.595.572.595.272 0 .42-.064.63-.277.069.1.091.15.218.255a.08.08 0 0 0 .09-.01l.294-.252c.032-.026.026-.067.001-.102m-.68-.577c0 .15.004.273-.07.406-.061.107-.158.173-.265.173-.147 0-.232-.112-.232-.277 0-.325.291-.384.568-.384zm5.687.577c-.07-.096-.144-.175-.144-.354v-.594c0-.253.018-.484-.168-.658-.147-.14-.39-.19-.575-.19-.364 0-.77.136-.854.585-.01.047.026.073.057.08l.37.04c.034-.002.06-.036.066-.07.032-.155.162-.23.307-.23.079 0 .168.03.214.099.054.079.047.186.047.277v.05c-.221.025-.511.041-.718.132a.648.648 0 0 0-.408.624c0 .397.25.595.572.595.272 0 .42-.064.63-.277.069.1.092.15.219.255a.079.079 0 0 0 .09-.01v.001c.077-.068.216-.188.294-.253.03-.026.026-.067 0-.102m-.75-.171c-.061.107-.158.173-.265.173-.147 0-.232-.112-.232-.277 0-.325.292-.384.568-.384v.083c0 .149.004.272-.071.405m5.16.53h-.381a.072.072 0 0 1-.068-.07l-.001-1.96a.072.072 0 0 1 .073-.065h.354a.072.072 0 0 1 .068.055v.3h.008c.107-.268.256-.396.52-.396a.5.5 0 0 1 .446.23c.1.158.1.421.1.611v1.234a.073.073 0 0 1-.074.061h-.383a.072.072 0 0 1-.068-.061v-1.065c0-.214.025-.527-.238-.527a.248.248 0 0 0-.221.156.871.871 0 0 0-.061.371v1.056a.073.073 0 0 1-.074.07m-1.609-2.136c.567 0 .873.487.873 1.105 0 .598-.338 1.073-.873 1.073-.556 0-.86-.487-.86-1.093 0-.61.307-1.085.86-1.085m.004.4c-.282 0-.3.384-.3.623s-.004.75.296.75c.296 0 .31-.412.31-.663a1.81 1.81 0 0 0-.057-.52c-.043-.136-.128-.19-.25-.19m-7.061 1.736h-.382a.072.072 0 0 1-.069-.064v-1.96c0-.04.034-.07.074-.07h.356c.037.001.067.03.07.065v.256h.007c.092-.248.267-.363.502-.363.239 0 .389.115.496.363a.542.542 0 0 1 .527-.363c.16 0 .335.066.442.214.122.165.097.405.097.615v1.237c0 .039-.034.07-.074.07h-.382a.071.071 0 0 1-.068-.07v-1.04c0-.082.007-.288-.011-.366-.029-.132-.114-.17-.225-.17a.254.254 0 0 0-.228.161c-.04.1-.035.264-.035.376v1.039c0 .04-.033.07-.074.07h-.382a.072.072 0 0 1-.068-.07v-1.04c0-.218.035-.54-.236-.54-.274 0-.264.314-.264.54v1.04a.07.07 0 0 1-.073.07m4.579-1.749v-.28a.07.07 0 0 1 .07-.07H8.46c.04 0 .072.028.072.07v.24c0 .04-.034.093-.094.176l-.65.929c.24-.006.496.03.716.153.049.028.062.07.066.11v.299c0 .04-.045.088-.092.064a1.446 1.446 0 0 0-1.327.002c-.043.023-.089-.024-.089-.065v-.284c0-.045 0-.123.047-.192l.753-1.081h-.656a.07.07 0 0 1-.072-.07m.817 2.16c-.092-.117-.606-.055-.838-.028-.07.009-.08-.052-.017-.097.41-.288 1.083-.205 1.16-.108.08.097-.02.771-.405 1.093-.059.05-.115.023-.089-.042.087-.216.28-.7.189-.818m-.299.341c-.717.529-1.756.81-2.651.81a4.799 4.799 0 0 1-3.239-1.235c-.067-.06-.007-.143.074-.097a6.52 6.52 0 0 0 3.24.86c.795 0 1.668-.165 2.472-.506.121-.05.223.08.104.168m15.53-.693c-.342 0-.604-.094-.788-.281-.183-.188-.275-.457-.275-.807 0-.358.094-.64.281-.844.188-.204.448-.306.782-.306.256 0 .457.062.602.186.145.125.217.29.217.497a.531.531 0 0 1-.234.47c-.156.105-.385.158-.688.158-.157 0-.294-.015-.41-.045.017.185.073.317.168.397.095.08.239.12.432.12.077 0 .152-.005.225-.015.073-.01.175-.03.304-.064a.163.163 0 0 1 .046-.008c.047 0 .07.032.07.095v.19c0 .045-.006.076-.018.093a.152.152 0 0 1-.073.048 1.775 1.775 0 0 1-.64.116m-.137-1.299c.14 0 .242-.021.306-.064.063-.043.095-.108.095-.196 0-.174-.104-.26-.31-.26-.265 0-.418.162-.46.487.11.022.233.033.369.033m-4.418 1.237c-.035 0-.062-.008-.078-.025-.017-.016-.025-.043-.025-.078V10.75c0-.039.008-.066.025-.08.016-.016.043-.023.079-.023h.297c.064 0 .102.03.116.09l.033.112a1.81 1.81 0 0 1 .395-.205c.117-.04.238-.06.362-.06.248 0 .423.089.525.265.14-.094.273-.161.397-.202.124-.042.253-.062.385-.062.193 0 .342.053.449.16.106.108.159.259.159.452v1.46c0 .035-.008.062-.023.078-.015.017-.042.025-.08.025h-.398c-.035 0-.062-.008-.078-.025-.017-.016-.025-.043-.025-.078v-1.328c0-.188-.084-.281-.252-.281-.15 0-.3.036-.451.107v1.502c0 .036-.008.062-.023.078-.015.017-.042.025-.08.025h-.397c-.036 0-.062-.008-.08-.025-.016-.016-.024-.042-.024-.078v-1.328c0-.188-.084-.281-.252-.281a1.01 1.01 0 0 0-.455.111v1.498c0 .036-.008.062-.023.078-.015.017-.042.025-.08.025zm-.917-2.44a.36.36 0 0 1-.252-.087.303.303 0 0 1-.095-.236c0-.1.031-.178.095-.235a.359.359 0 0 1 .252-.087.36.36 0 0 1 .252.087c.064.057.096.136.096.235s-.032.178-.096.236a.36.36 0 0 1-.252.087m-.198 2.44c-.036 0-.062-.008-.079-.025-.017-.016-.025-.042-.025-.078V10.75c0-.039.008-.066.025-.08.017-.016.043-.023.079-.023h.397c.038 0 .065.007.08.022s.023.042.023.081v1.907c0 .036-.008.062-.023.078-.015.017-.042.025-.08.025zm-1.653 0c-.036 0-.062-.008-.079-.025-.016-.016-.024-.042-.024-.078V10.75c0-.039.008-.066.024-.08.017-.016.043-.023.079-.023h.298c.063 0 .102.03.115.09l.054.224a1.18 1.18 0 0 1 .312-.259.666.666 0 0 1 .313-.076h.058c.038 0 .066.008.082.023.017.015.025.042.025.08v.348c0 .036-.008.062-.023.078-.015.017-.042.025-.08.025a.83.83 0 0 1-.075-.004 1.366 1.366 0 0 0-.116-.004c-.063 0-.14.009-.231.027a1.14 1.14 0 0 0-.232.068v1.39c0 .036-.007.062-.022.078-.016.017-.043.025-.081.025zm-2.477.852c-.036 0-.062-.008-.079-.023-.016-.015-.024-.042-.024-.08V10.75c0-.039.008-.066.024-.08.017-.016.043-.023.079-.023h.298c.063 0 .102.03.115.09l.03.108a.917.917 0 0 1 .3-.19.956.956 0 0 1 .357-.07c.267 0 .48.097.635.293.156.196.234.46.234.794 0 .23-.039.429-.116.6a.938.938 0 0 1-.314.395.775.775 0 0 1-.455.138.965.965 0 0 1-.323-.053.773.773 0 0 1-.26-.15v.907c0 .038-.008.065-.023.08-.016.015-.042.023-.081.023zm.906-1.261c.154 0 .268-.053.34-.157.074-.105.11-.27.11-.497 0-.229-.035-.395-.107-.5-.072-.105-.186-.157-.343-.157a.788.788 0 0 0-.406.111v1.088a.76.76 0 0 0 .406.112z"></path></g></svg>`,
+  appletv   : () => `<svg fill="#ffffff" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M20.57 17.735h-1.815l-3.34-9.203h1.633l2.02 5.987c.075.231.273.9.586 2.012l.297-.997.33-1.006 2.094-6.004H24zm-5.344-.066a5.76 5.76 0 0 1-1.55.207c-1.23 0-1.84-.693-1.84-2.087V9.646h-1.063V8.532h1.121V7.081l1.476-.602v2.062h1.707v1.113H13.38v5.805c0 .446.074.75.214.932.14.182.396.264.75.264.207 0 .495-.041.883-.115zm-7.29-5.343c.017 1.764 1.55 2.358 1.567 2.366-.017.042-.248.842-.808 1.658-.487.71-.99 1.418-1.79 1.435-.783.016-1.03-.462-1.93-.462-.89 0-1.17.445-1.913.478-.758.025-1.344-.775-1.838-1.484-.998-1.451-1.765-4.098-.734-5.88.51-.89 1.426-1.451 2.416-1.46.75-.016 1.468.512 1.93.512.461 0 1.327-.627 2.234-.536.38.016 1.452.157 2.136 1.154-.058.033-1.278.743-1.27 2.219M6.468 7.988c.404-.495.685-1.18.61-1.864-.585.025-1.294.388-1.723.883-.38.437-.71 1.138-.619 1.806.652.05 1.328-.338 1.732-.825z"></path></g></svg>`,
+  spotify   : () => `<svg viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>Spotify-color</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Color-" transform="translate(-200.000000, -460.000000)" fill="#1DB954"> <path d="M238.16,481.36 C230.48,476.8 217.64,476.32 210.32,478.6 C209.12,478.96 207.92,478.24 207.56,477.16 C207.2,475.96 207.92,474.76 209,474.4 C217.52,471.88 231.56,472.36 240.44,477.64 C241.52,478.24 241.88,479.68 241.28,480.76 C240.68,481.6 239.24,481.96 238.16,481.36 M237.92,488.08 C237.32,488.92 236.24,489.28 235.4,488.68 C228.92,484.72 219.08,483.52 211.52,485.92 C210.56,486.16 209.48,485.68 209.24,484.72 C209,483.76 209.48,482.68 210.44,482.44 C219.2,479.8 230,481.12 237.44,485.68 C238.16,486.04 238.52,487.24 237.92,488.08 M235.04,494.68 C234.56,495.4 233.72,495.64 233,495.16 C227.36,491.68 220.28,490.96 211.88,492.88 C211.04,493.12 210.32,492.52 210.08,491.8 C209.84,490.96 210.44,490.24 211.16,490 C220.28,487.96 228.2,488.8 234.44,492.64 C235.28,493 235.4,493.96 235.04,494.68 M224,460 C210.8,460 200,470.8 200,484 C200,497.2 210.8,508 224,508 C237.2,508 248,497.2 248,484 C248,470.8 237.32,460 224,460" id="Spotify"> </path> </g> </g> </g></svg>`,
+  twitch    : () => `<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill="#ffffff" d="M13 7.5l-2 2H9l-1.75 1.75V9.5H5V2h8v5.5z"></path> <g fill="#9146FF"> <path d="M4.5 1L2 3.5v9h3V15l2.5-2.5h2L14 8V1H4.5zM13 7.5l-2 2H9l-1.75 1.75V9.5H5V2h8v5.5z"></path> <path d="M11.5 3.75h-1v3h1v-3zM8.75 3.75h-1v3h1v-3z"></path> </g> </g></svg>`,
+  max       : () => `<svg fill="#ffffff" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M7.042 16.896H4.414v-3.754H2.708v3.754H.01L0 7.22h2.708v3.6h1.706v-3.6h2.628zm12.043.046C21.795 16.94 24 14.689 24 11.978a4.89 4.89 0 0 0-4.915-4.92c-2.707-.002-4.09 1.991-4.432 2.795.003-1.207-1.187-2.632-2.58-2.634H7.59v9.674l4.181.001c1.686 0 2.886-1.46 2.888-2.713.385.788 1.72 2.762 4.427 2.76zm-7.665-3.936c.387 0 .692.382.692.817 0 .435-.305.817-.692.817h-1.33v-1.634zm.005-3.633c.387 0 .692.382.692.817 0 .436-.305.818-.692.818h-1.33V9.373zm1.77 2.607c.305-.039.813-.387.992-.61-.063.276-.068 1.074.006 1.35-.204-.314-.688-.701-.998-.74zm3.43 0a2.462 2.462 0 1 1 4.924 0 2.462 2.462 0 0 1-4.925 0zm2.462 1.936a1.936 1.936 0 1 0 0-3.872 1.936 1.936 0 0 0 0 3.872z"></path></g></svg>`,
+  hulu      : () => `<svg viewBox="2.5 -97.50099999999999 295.003 295.003" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><linearGradient id="a" gradientUnits="userSpaceOnUse" x1="-895.929" y1="1218.797" x2="-895.929" y2="1121.555" gradientTransform="matrix(1 0 0 -1 1045.93 1220.176)"><stop offset="0" stop-color="#a3cc39"></stop><stop offset=".698" stop-color="#85bd40"></stop><stop offset="1" stop-color="#65ad45"></stop></linearGradient><path d="M297.5 31.698h-23.49v39.196c0 1.771-.684 3.274-1.775 4.508-1.094 1.093-2.596 1.639-4.366 1.771H254.21c-1.912-.137-3.415-.683-4.507-1.771-1.096-1.229-1.775-2.731-1.775-4.508V31.698h-23.49v41.245c.139 5.464 1.096 10.242 3.416 14.062 2.318 3.826 5.324 6.693 9.285 8.604 4.098 1.912 8.74 3.01 14.065 3.01h22.81v-.271c4.918 0 9.149-1.096 12.7-3.144 3.413-2.188 6.146-5.188 7.923-9.019 1.909-3.821 2.866-8.332 2.866-13.248l-.003-41.239zM62.456 34.157c-4.098-1.775-8.604-2.595-13.521-2.459h-15.16l-5.872.684c-1.366.409-2.049.683-2.049.683V1.379H2.5v97.242h23.354V59.286c.137-1.64.683-3.277 1.912-4.37s2.595-1.775 4.507-1.775h13.658c1.638 0 3.141.688 4.37 1.775 1.229 1.093 1.773 2.73 1.911 4.37v39.335h23.354V56.283c0-5.874-1.229-10.653-3.551-14.341-2.456-3.551-5.598-6.146-9.559-7.785zm79.485 36.738c-.137 1.772-.683 3.275-1.775 4.508-1.23 1.094-2.732 1.64-4.507 1.771h-13.658c-1.775-.137-3.277-.683-4.37-1.771-1.229-1.229-1.775-2.73-1.912-4.508V31.698H92.365v41.245c0 5.464 1.093 10.242 3.278 14.062 2.185 3.826 5.326 6.693 9.287 8.604 4.097 1.912 8.604 3.01 14.066 3.01h22.945v-.271c4.917 0 9.149-1.096 12.564-3.144 3.414-2.188 6.146-5.188 8.06-9.019 1.773-3.821 2.731-8.332 2.867-13.248V31.698h-23.491v39.197zm41.247 27.726h23.354V1.379h-23.354v97.242z" fill="url(#a)"></path></g></svg>`,
+  dazn      : () => `<svg fill="#ffffff" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M19.697 11.052l1.032-3.459 1.052 3.459zM24.828 14.079l-2.697-8.172c-0.063-0.177-0.131-0.297-0.209-0.355-0.077-0.052-0.203-0.083-0.369-0.083h-1.495c-0.131-0.011-0.265 0.020-0.38 0.093-0.079 0.057-0.147 0.172-0.199 0.344l-2.724 8.172c-0.036 0.041-0.052 0.129-0.052 0.255 0 0.197 0.12 0.297 0.36 0.297h1.12c0.104 0 0.187 0 0.249-0.011 0.057-0.005 0.109-0.027 0.156-0.068 0.043-0.041 0.079-0.093 0.1-0.151 0.031-0.068 0.061-0.161 0.099-0.271l0.421-1.428h3.079l0.432 1.401c0.036 0.12 0.068 0.213 0.104 0.281 0.027 0.063 0.068 0.115 0.115 0.161 0.041 0.037 0.093 0.063 0.151 0.073h0.005c0.057 0.005 0.136 0.011 0.229 0.011h1.199c0.239 0 0.359-0.1 0.359-0.297 0-0.036 0-0.079-0.005-0.12-0.015-0.047-0.031-0.093-0.052-0.14zM23.505 17.369h-0.865c-0.224 0-0.369 0.032-0.443 0.095-0.072 0.067-0.109 0.197-0.109 0.396v4.848l-2.547-4.864c-0.099-0.204-0.203-0.333-0.301-0.391-0.1-0.057-0.271-0.084-0.521-0.084h-0.797c-0.224 0-0.369 0.032-0.443 0.095-0.072 0.067-0.109 0.197-0.109 0.396v8.181c0 0.199 0.037 0.328 0.104 0.391 0.068 0.063 0.215 0.099 0.439 0.099h0.875c0.224 0 0.369-0.036 0.443-0.099s0.109-0.192 0.109-0.391v-4.864l2.547 4.875c0.099 0.208 0.203 0.339 0.303 0.396 0.099 0.057 0.271 0.083 0.52 0.083h0.797c0.224 0 0.369-0.036 0.443-0.099s0.109-0.192 0.109-0.391v-8.181c0-0.199-0.036-0.329-0.109-0.396-0.073-0.063-0.219-0.095-0.443-0.095zM27.776 16.593l2.219 2.219v11.183h-27.989v-11.183l2.219-2.219c0.328-0.328 0.328-0.859 0-1.187l-2.219-2.219v-11.183h27.989v11.183l-2.224 2.219c-0.323 0.328-0.323 0.859 0 1.187zM32 0h-32v14.151l1.849 1.849-1.849 1.849v14.151h32v-14.151l-1.849-1.849 1.849-1.849zM14.229 24.625h-3.615l3.807-5.355c0.048-0.063 0.084-0.131 0.115-0.203 0.016-0.057 0.027-0.12 0.027-0.183v-1.025c0-0.199-0.036-0.329-0.109-0.396-0.073-0.063-0.224-0.095-0.448-0.095h-5.495c-0.199 0-0.328 0.037-0.385 0.109-0.063 0.073-0.095 0.224-0.095 0.453v0.776c0 0.229 0.032 0.38 0.095 0.453 0.057 0.073 0.187 0.109 0.385 0.109h3.391l-3.756 5.355c-0.088 0.099-0.135 0.229-0.14 0.359v1.057c0 0.199 0.036 0.328 0.109 0.391s0.224 0.099 0.443 0.099h5.667c0.197 0 0.328-0.036 0.391-0.109 0.057-0.072 0.088-0.228 0.088-0.457v-0.771c0-0.235-0.031-0.387-0.088-0.459-0.063-0.073-0.193-0.109-0.391-0.109zM12.541 10.979c0 0.349-0.020 0.647-0.068 0.881-0.047 0.233-0.124 0.427-0.228 0.572-0.109 0.147-0.256 0.251-0.428 0.308-0.208 0.067-0.427 0.093-0.645 0.088h-1.057v-5.557h1.057c0.484 0 0.839 0.145 1.052 0.432s0.317 0.761 0.317 1.423zM14.385 7.26c-0.303-0.609-0.713-1.063-1.229-1.353-0.52-0.292-1.172-0.437-1.959-0.437h-2.64c-0.224 0-0.369 0.036-0.443 0.099s-0.109 0.192-0.109 0.391v8.181c0 0.199 0.036 0.329 0.109 0.396 0.073 0.063 0.219 0.095 0.443 0.095h2.959c1.396 0 2.353-0.595 2.864-1.787 0.12-0.276 0.204-0.552 0.251-0.828 0.052-0.355 0.077-0.709 0.072-1.063v-1.74c0-0.489-0.020-0.875-0.072-1.156-0.043-0.281-0.131-0.557-0.256-0.817l0.005 0.020z"></path> </g></svg>`,
+  videoland : () => `<svg height="48" viewBox="0 0 155 48" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="46" height="46" rx="10" fill="#E4002B"/><polygon points="15,10 15,38 38,24" fill="#fff"/></svg>`,
 };
 
 // ─── LOGO LOOKUP ──────────────────────────────────────────────────────────────
@@ -52,21 +55,15 @@ function _norm(s) {
   return s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 }
 
-// Returns true for strings that are system/OS identifiers, not user-visible app names.
-// Catches: reverse-DNS package names (com.android.tv), generic Android/system labels.
 function _isSystemString(s) {
   const t = s.trim();
-  // Reverse-DNS with at least 2 dots: com.android.tv, org.kodi.kodi, etc.
   if (/^[a-z][a-z0-9_]*(\.[a-z][a-z0-9_]*){2,}$/i.test(t)) return true;
-  // Two-segment dotted: com.android, tv.plex
   if (/^[a-z][a-z0-9]*\.[a-z][a-z0-9]+$/i.test(t)) return true;
-  // Known generic OS labels
   if (/^(android|smartcast|livetv|live tv|google cast|chromecast|fire tv|webos|tizen|home|launcher|luncherx|tv launcher)/i.test(t)) return true;
   if (/launcher/i.test(t)) return true;
   return false;
 }
 
-// Known Android/TV package names → logo key
 const _PKG_TABLE = {
   'com.google.android.youtube.tv':          'youtube',
   'com.google.android.youtube':            'youtube',
@@ -94,7 +91,6 @@ const _PKG_TABLE = {
   'nl.rtl.videoland':                     'videoland',
 };
 
-// Terms that must appear in the normalized app_name → logo key
 const _ALIAS_TABLE = [
   { terms: ['youtube'],             key: 'youtube'   },
   { terms: ['netflix'],             key: 'netflix'   },
@@ -113,12 +109,8 @@ const _ALIAS_TABLE = [
 function tvGetLogo(appName) {
   if (!appName || !appName.trim()) return '';
   const t = appName.trim();
-
-  // 1. Direct package name lookup (e.g. com.google.android.youtube.tv)
   const pkgLower = t.toLowerCase();
   if (pkgLower in _PKG_TABLE) return _LOGOS[_PKG_TABLE[pkgLower]]?.() || '';
-
-  // 2. Partial package match — tail segments must match exactly, not as substring
   if (t.includes('.')) {
     for (const [pkg, key] of Object.entries(_PKG_TABLE)) {
       const tailSegs = pkg.split('.').slice(-2);
@@ -126,23 +118,15 @@ function tvGetLogo(appName) {
       const matches  = pkgSegs.some((_, i) => tailSegs.every((s, j) => pkgSegs[i + j] === s));
       if (matches) return _LOGOS[key]?.() || '';
     }
-    // Unknown dotted package → hide
     return '';
   }
-
-  // 3. System string filter (generic labels)
   if (_isSystemString(t)) return '';
-
-  // 4. Friendly name alias matching
   const n = ' ' + _norm(t) + ' ';
   for (const { terms, key } of _ALIAS_TABLE) {
-    if (terms.some(term => n.includes(term))) {
-      return _LOGOS[key]?.() || '';
-    }
+    if (terms.some(term => n.includes(term))) return _LOGOS[key]?.() || '';
   }
   return '';
 }
-
 
 // ─── DEFAULT APP LAUNCHER LIST ────────────────────────────────────────────────
 const DEFAULT_APPS = [
@@ -159,6 +143,48 @@ const DEFAULT_APPS = [
   { name: 'DAZN',        id: 'com.dazn.mobile'                   },
   { name: 'Videoland',   id: 'nl.rtl.videoland'                  },
 ];
+
+// ─── BENTO GRID LAYOUT ───────────────────────────────────────────────────────
+// Each item: { col, row, w, h } on a 4-column grid
+const BENTO_LAYOUT = [
+  { col:1, row:1, w:2, h:2 },  // 0  large
+  { col:3, row:1, w:1, h:1 },  // 1
+  { col:4, row:1, w:1, h:1 },  // 2
+  { col:3, row:2, w:2, h:1 },  // 3  wide
+  { col:1, row:3, w:1, h:1 },  // 4
+  { col:2, row:3, w:1, h:1 },  // 5
+  { col:3, row:3, w:2, h:2 },  // 6  large
+  { col:1, row:4, w:2, h:1 },  // 7  wide
+  { col:1, row:5, w:1, h:1 },  // 8
+  { col:2, row:5, w:1, h:1 },  // 9
+  { col:3, row:5, w:1, h:1 },  // 10
+  { col:4, row:5, w:1, h:1 },  // 11
+];
+
+function _buildBentoHTML(apps) {
+  let html = '';
+  const count = Math.min(apps.length, BENTO_LAYOUT.length);
+  for (let i = 0; i < count; i++) {
+    const app = apps[i];
+    const b = BENTO_LAYOUT[i];
+    const logo = tvGetLogo(app.id);
+    const hue = ((app.name.charCodeAt(0)||0)*47 + (app.name.charCodeAt(1)||0)*13) % 360;
+    const isLarge = b.w === 2 && b.h === 2;
+    const logoSize = isLarge ? 28 : 18;
+    const logoContent = logo
+      ? `<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;">${logo}</div>`
+      : `<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-family:'Syne',system-ui;font-weight:700;font-size:${isLarge?14:10}px;color:rgba(255,255,255,.7);">${app.name}</div>`;
+    html += `<div class="bento-tile" style="
+      grid-column: ${b.col} / span ${b.w};
+      grid-row: ${b.row} / span ${b.h};
+      background: linear-gradient(135deg, hsla(${hue},40%,18%,.9) 0%, hsla(${hue},35%,12%,.9) 100%);
+      border: 1px solid hsla(${hue},50%,40%,.2);
+    ">${logoContent}</div>`;
+  }
+  return html;
+}
+
+// ─── CSS ──────────────────────────────────────────────────────────────────────
 const TV_CSS = `
   :host { display: block; }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -169,7 +195,8 @@ const TV_CSS = `
     padding: 20px 20px 22px;
     box-shadow: 0 20px 50px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.06);
     position: relative; overflow: hidden;
-    font-family: 'DM Sans', system-ui, sans-serif; color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    color: #fff;
   }
   .card::before {
     content: ''; position: absolute; top: -60px; right: -60px;
@@ -180,7 +207,7 @@ const TV_CSS = `
 
   /* HEADER */
   .hdr { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
-  .room { font-family: 'Syne', system-ui, sans-serif; font-weight: 700; font-size: 18px; letter-spacing: -.3px; }
+  .room { font-weight: 700; font-size: 18px; letter-spacing: -.3px; }
   .badge { display: flex; align-items: center; gap: 5px; font-size: 11px; color: rgba(255,255,255,.45); margin-top: 4px; }
   .dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 6px rgba(74,222,128,.6); animation: blink 2s ease infinite; flex-shrink: 0; }
   .dot.off { background: rgba(255,255,255,.2); box-shadow: none; animation: none; }
@@ -224,7 +251,6 @@ const TV_CSS = `
       0 0 0 1px rgba(99,102,241,.18);
   }
 
-
   .screen {
     width: 100%; aspect-ratio: 16/9; background: #04040a;
     border-radius: 8px; overflow: hidden; position: relative; transition: box-shadow .4s;
@@ -236,43 +262,19 @@ const TV_CSS = `
   .logo-wrap { display:flex; align-items:center; justify-content:center; z-index:1; } .logo-wrap svg { display:block; }
   .off-msg { font-size: 11px; color: rgba(255,255,255,.14); letter-spacing: 1.5px; text-transform: uppercase; }
 
-  /* HOME SCREEN DECORATIVE */
-  .home-screen { width:100%; height:100%; display:flex; flex-direction:column; gap:5px; padding:8px; box-sizing:border-box; }
-  .home-row { display:flex; gap:5px; flex:1; }
-  .home-tile { flex:1; border-radius:5px; background:var(--hc); animation: hpulse 3s ease-in-out infinite; }
-  .home-tile.wide { flex:1.8; }
-  .home-tile:nth-child(2) { animation-delay:.4s; }
-  .home-tile:nth-child(3) { animation-delay:.8s; }
-  .home-bar { height:5px; border-radius:3px; background:rgba(255,255,255,.08); margin:0 2px; }
-  .home-bar.short { width:55%; }
-  @keyframes hpulse { 0%,100%{opacity:.6} 50%{opacity:1} }
+  /* BENTO HOME SCREEN */
+  .bento-home { width:100%; height:100%; display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(5,1fr); gap:3px; padding:4px; box-sizing:border-box; position:absolute; inset:0; z-index:1; }
+  .bento-tile { border-radius:4px; overflow:hidden; display:flex; align-items:center; justify-content:center; transition: all .2s; }
+  .bento-tile svg { max-width:65%; max-height:55%; width:auto; height:auto; }
+  .bento-tile:hover { filter:brightness(1.3); }
 
-  /* APP EDIT MODE */
-  .app-edit-btn { font-size:11px; color:rgba(255,255,255,.4); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:4px 10px; cursor:pointer; transition:all .2s; white-space:nowrap; }
-  .app-edit-btn:hover { background:rgba(255,255,255,.12); color:rgba(255,255,255,.8); }
-  .app-edit-btn.active { background:rgba(99,102,241,.18); border-color:rgba(99,102,241,.4); color:#a5b4fc; }
-  .app-item { position:relative; }
-  .app-del { position:absolute; top:-5px; right:-5px; width:18px; height:18px; border-radius:50%; background:#ef4444; border:none; color:#fff; font-size:12px; line-height:1; cursor:pointer; display:none; align-items:center; justify-content:center; z-index:5; }
-  .edit-mode .app-del { display:flex; }
-  .edit-mode .app-item { cursor:grab; }
-  .edit-mode .app-item:active { cursor:grabbing; opacity:.7; }
-  .app-add { border:1px dashed rgba(255,255,255,.2); background:rgba(255,255,255,.03); color:rgba(255,255,255,.4); font-size:22px; }
-  .app-add:hover { border-color:rgba(99,102,241,.5); background:rgba(99,102,241,.08); color:#a5b4fc; }
-  .add-form { grid-column:1/-1; display:none; flex-direction:column; gap:8px; padding:10px; background:rgba(255,255,255,.04); border-radius:12px; border:1px solid rgba(255,255,255,.08); }
-  .add-form.open { display:flex; }
-  .add-inp { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:7px 10px; color:#fff; font-size:12px; font-family:system-ui,sans-serif; outline:none; }
-  .add-inp:focus { border-color:rgba(99,102,241,.5); }
-  .add-inp::placeholder { color:rgba(255,255,255,.25); }
-  .add-row { display:flex; gap:6px; }
-  .add-save { flex:1; background:linear-gradient(135deg,#6366f1,#8b5cf6); border:none; border-radius:8px; color:#fff; font-size:12px; font-weight:600; padding:7px; cursor:pointer; }
-  .add-cancel { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:8px; color:rgba(255,255,255,.5); font-size:12px; padding:7px 10px; cursor:pointer; }
   .hint { position: absolute; inset: 0; border-radius: 8px; background: rgba(4,4,14,.76); display: flex; align-items: center; justify-content: center; gap: 7px; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 10; }
   .tv-click:hover .hint { opacity: 1; }
   .hint span { font-size: 12px; color: rgba(255,255,255,.78); }
   .hint svg { width: 13px; height: 13px; opacity: .7; }
 
   .bezel { display: flex; align-items: center; justify-content: space-between; padding: 5px 14px 7px; margin-top: 3px; }
-  .tv-brand { font-family: 'Syne', system-ui, sans-serif; font-size: 8px; font-weight: 700; letter-spacing: 2.5px; color: rgba(255,255,255,.12); text-transform: uppercase; }
+  .tv-brand { font-size: 8px; font-weight: 700; letter-spacing: 2.5px; color: rgba(255,255,255,.12); text-transform: uppercase; }
   .led { width: 5px; height: 5px; border-radius: 50%; background: rgba(74,222,128,.55); box-shadow: 0 0 5px rgba(74,222,128,.45); transition: all .3s; }
   .led.off { background: rgba(255,80,80,.4); box-shadow: 0 0 4px rgba(255,80,80,.3); }
 
@@ -283,7 +285,7 @@ const TV_CSS = `
   /* NOW PLAYING */
   .np { text-align: center; margin-bottom: 14px; }
   .np-app { font-size: 10px; color: rgba(255,255,255,.28); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 3px; min-height: 14px; }
-  .np-title { font-family: 'Syne', system-ui, sans-serif; font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .np-title { font-weight: 600; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .np-sub { font-size: 11px; color: rgba(255,255,255,.32); margin-top: 2px; }
 
   /* PROGRESS */
@@ -329,23 +331,43 @@ const TV_CSS = `
   .app-modal { width: 360px; max-width: 95vw; background: linear-gradient(145deg, #1b1b26, #13131c); border-radius: 22px; border: 1px solid rgba(255,255,255,.1); box-shadow: 0 30px 70px rgba(0,0,0,.8), inset 0 1px 0 rgba(255,255,255,.07); overflow: hidden; transform: translateY(14px) scale(.96); transition: transform .28s cubic-bezier(.34,1.56,.64,1); }
   .app-overlay.open .app-modal { transform: translateY(0) scale(1); }
   .app-head { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px 14px; border-bottom: 1px solid rgba(255,255,255,.06); }
-  .app-head-title { font-family: 'Syne', system-ui, sans-serif; font-weight: 700; font-size: 14px; color: rgba(255,255,255,.8); letter-spacing: -.2px; }
+  .app-head-title { font-weight: 700; font-size: 14px; color: rgba(255,255,255,.8); letter-spacing: -.2px; }
   .app-close { width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.05); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .2s; color: rgba(255,255,255,.45); }
   .app-close:hover { background: rgba(255,255,255,.12); color: #fff; }
   .app-close svg { width: 12px; height: 12px; }
   .app-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 14px; max-height: 58vh; overflow-y: auto; }
   .app-grid::-webkit-scrollbar { width: 3px; }
   .app-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 2px; }
-  .app-item { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px 4px 8px; border-radius: 14px; border: 1px solid rgba(255,255,255,.05); background: rgba(255,255,255,.03); cursor: pointer; transition: all .18s; }
+  .app-item { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px 4px 8px; border-radius: 14px; border: 1px solid rgba(255,255,255,.05); background: rgba(255,255,255,.03); cursor: pointer; transition: all .18s; position: relative; }
   .app-item:hover { background: rgba(99,102,241,.12); border-color: rgba(99,102,241,.3); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.3); }
   .app-item:active { transform: scale(.95); }
   .app-item.active-app { border-color: rgba(74,222,128,.4); background: rgba(74,222,128,.07); }
   .app-logo { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
   .app-logo svg { width: 44px; height: 44px; }
-  .app-logo-fallback { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'Syne', system-ui, sans-serif; font-weight: 700; font-size: 18px; color: #fff; }
+  .app-logo-fallback { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; color: #fff; }
   .app-name { font-size: 10px; color: rgba(255,255,255,.5); text-align: center; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 0 2px; }
+
+  /* APP EDIT MODE */
+  .app-edit-btn { font-size:11px; color:rgba(255,255,255,.4); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:4px 10px; cursor:pointer; transition:all .2s; white-space:nowrap; }
+  .app-edit-btn:hover { background:rgba(255,255,255,.12); color:rgba(255,255,255,.8); }
+  .app-edit-btn.active { background:rgba(99,102,241,.18); border-color:rgba(99,102,241,.4); color:#a5b4fc; }
+  .app-del { position:absolute; top:-5px; right:-5px; width:18px; height:18px; border-radius:50%; background:#ef4444; border:none; color:#fff; font-size:12px; line-height:1; cursor:pointer; display:none; align-items:center; justify-content:center; z-index:5; }
+  .edit-mode .app-del { display:flex; }
+  .edit-mode .app-item { cursor:grab; }
+  .edit-mode .app-item:active { cursor:grabbing; opacity:.7; }
+  .app-add { border:1px dashed rgba(255,255,255,.2); background:rgba(255,255,255,.03); color:rgba(255,255,255,.4); font-size:22px; }
+  .app-add:hover { border-color:rgba(99,102,241,.5); background:rgba(99,102,241,.08); color:#a5b4fc; }
+  .add-form { grid-column:1/-1; display:none; flex-direction:column; gap:8px; padding:10px; background:rgba(255,255,255,.04); border-radius:12px; border:1px solid rgba(255,255,255,.08); }
+  .add-form.open { display:flex; }
+  .add-inp { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:7px 10px; color:#fff; font-size:12px; font-family:system-ui,sans-serif; outline:none; }
+  .add-inp:focus { border-color:rgba(99,102,241,.5); }
+  .add-inp::placeholder { color:rgba(255,255,255,.25); }
+  .add-row { display:flex; gap:6px; }
+  .add-save { flex:1; background:linear-gradient(135deg,#6366f1,#8b5cf6); border:none; border-radius:8px; color:#fff; font-size:12px; font-weight:600; padding:7px; cursor:pointer; }
+  .add-cancel { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:8px; color:rgba(255,255,255,.5); font-size:12px; padding:7px 10px; cursor:pointer; }
+
   .m-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px 16px; border-bottom: 1px solid rgba(255,255,255,.06); }
-  .m-title { font-family: 'Syne', system-ui, sans-serif; font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+  .m-title { font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 8px; }
   .m-title svg { width: 15px; height: 15px; opacity: .55; }
   .m-close { width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.05); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .2s; color: rgba(255,255,255,.5); }
   .m-close:hover { background: rgba(255,255,255,.12); color: #fff; }
@@ -361,7 +383,6 @@ const TV_CSS = `
   .s-inp::placeholder { color: rgba(255,255,255,.2); }
   .s-sel { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='rgba(255,255,255,0.35)' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-size: 10px; padding-right: 32px; }
   .s-sel option { background: #1a1a24; color: #fff; }
-  .auto-chip { display: inline-block; font-size: 10px; color: #4ade80; background: rgba(74,222,128,.12); border: 1px solid rgba(74,222,128,.25); border-radius: 6px; padding: 2px 7px; margin-top: 2px; }
   .s-apply { margin-top: 4px; padding: 11px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border: none; border-radius: 12px; color: #fff; font-size: 13px; font-weight: 600; font-family: system-ui, sans-serif; cursor: pointer; transition: all .2s; box-shadow: 0 4px 14px rgba(99,102,241,.3); }
   .s-apply:hover { box-shadow: 0 4px 20px rgba(99,102,241,.5); transform: translateY(-1px); }
   .s-apply:active { transform: translateY(0); }
@@ -379,6 +400,7 @@ class TvMediaCard extends HTMLElement {
     this._hass         = null;
     this._raf          = null;
     this._hassInited   = false;
+    this._editMode     = false;
   }
 
   setConfig(config) {
@@ -396,9 +418,7 @@ class TvMediaCard extends HTMLElement {
 
   set hass(hass) {
     this._hass = hass;
-
     this._hassInited = true;
-
     this._updateCard();
   }
 
@@ -419,7 +439,6 @@ class TvMediaCard extends HTMLElement {
     return h ? `${h}:${String(m).padStart(2,'0')}:${String(ss).padStart(2,'0')}` : `${m}:${String(ss).padStart(2,'0')}`;
   }
 
-  // All entity_ids for a domain, sorted by friendly_name
   _domainEntities(domain) {
     if (!this._hass) return [];
     return Object.keys(this._hass.states)
@@ -431,7 +450,6 @@ class TvMediaCard extends HTMLElement {
       });
   }
 
-  // Build <option> HTML for a list of entity IDs
   _buildOpts(entities, current, withNone = false) {
     let html = withNone ? `<option value="">${this._t('none')}</option>` : '';
     for (const eid of entities) {
@@ -442,14 +460,25 @@ class TvMediaCard extends HTMLElement {
     return html;
   }
 
+  _getApps() {
+    // Try card config first, then fallback to defaults
+    // NOTE: localStorage removed — HA cards should not rely on it
+    if (this._savedApps) return [...this._savedApps];
+    return this._cfg.apps ? [...this._cfg.apps] : [...DEFAULT_APPS];
+  }
+
+  _saveApps(apps) {
+    // Store in memory (persists for this card instance)
+    this._savedApps = apps;
+  }
+
   // ── render (once) ────────────────────────────────────────────────────────────
   _render() {
     const c = this._cfg;
+    const apps = this._getApps();
+
     this.shadowRoot.innerHTML = `
-      <style>
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap');
-        ${TV_CSS}
-      </style>
+      <style>${TV_CSS}</style>
 
       <div class="card">
 
@@ -492,19 +521,13 @@ class TvMediaCard extends HTMLElement {
                   <div id="offMsg" style="display:flex">
                     <span class="off-msg">${this._t('standby')}</span>
                   </div>
-                  <div id="homeWrap" style="display:none" class="home-screen">
-                    <div class="home-row">
-                      <div class="home-tile wide" style="--hc:rgba(99,102,241,.35)"></div>
-                      <div class="home-tile" style="--hc:rgba(239,68,68,.3)"></div>
-                    </div>
-                    <div class="home-row">
-                      <div class="home-tile" style="--hc:rgba(16,185,129,.3)"></div>
-                      <div class="home-tile" style="--hc:rgba(245,158,11,.3)"></div>
-                      <div class="home-tile" style="--hc:rgba(139,92,246,.3)"></div>
-                    </div>
-                    <div class="home-bar"></div>
-                    <div class="home-bar short"></div>
+                  <div id="homeWrap" style="display:none" class="bento-home">
+                    ${_buildBentoHTML(apps)}
                   </div>
+                </div>
+                <div class="hint">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                  <span>${this._t('launchApp')}</span>
                 </div>
               </div>
               <div class="bezel">
@@ -562,7 +585,7 @@ class TvMediaCard extends HTMLElement {
 
       </div>
 
-      <!-- Settings overlay — outside .card to avoid overflow:hidden clip -->
+      <!-- Settings overlay -->
       <div class="overlay" id="overlay">
         <div class="modal">
           <div class="m-head">
@@ -574,47 +597,38 @@ class TvMediaCard extends HTMLElement {
             </button>
           </div>
           <div class="m-body">
-
             <div class="s-sec">${this._t('general')}</div>
-
             <div class="s-row">
               <div class="s-lbl">${this._t('roomName')}</div>
               <input class="s-inp" id="iName" type="text" value="${c.name || ''}" placeholder="${c.entity}">
             </div>
-
             <div class="s-row">
               <div class="s-lbl">${this._t('brand')}</div>
               <input class="s-inp" id="iBrand" type="text" value="${c.brand || ''}" placeholder="SAMSUNG / LG / SONY…">
             </div>
-
             <div class="s-row">
               <div class="s-lbl">${this._t('entity')}</div>
-              <!-- populated on open from hass.states -->
               <select class="s-sel" id="iEntity"><option value="${c.entity}">${c.entity}</option></select>
             </div>
-
             <div class="s-sec">${this._t('appearance')}</div>
-
             <div class="s-row">
               <div class="s-lbl">${this._t('lang')}</div>
               <select class="s-sel" id="iLang">
-                <option value="en">🇬🇧 English</option>
-                <option value="ro">🇷🇴 Română</option>
-                <option value="de">🇩🇪 Deutsch</option>
-                <option value="fr">🇫🇷 Français</option>
-                <option value="es">🇪🇸 Español</option>
-                <option value="it">🇮🇹 Italiano</option>
-                <option value="pl">🇵🇱 Polski</option>
-                <option value="hu">🇭🇺 Magyar</option>
-                <option value="nl">🇳🇱 Nederlands</option>
-                <option value="pt">🇵🇹 Português</option>
-                <option value="cs">🇨🇿 Čeština</option>
-                <option value="sk">🇸🇰 Slovenčina</option>
+                <option value="en">English</option>
+                <option value="ro">Română</option>
+                <option value="de">Deutsch</option>
+                <option value="fr">Français</option>
+                <option value="es">Español</option>
+                <option value="it">Italiano</option>
+                <option value="pl">Polski</option>
+                <option value="hu">Magyar</option>
+                <option value="nl">Nederlands</option>
+                <option value="pt">Português</option>
+                <option value="cs">Čeština</option>
+                <option value="sk">Slovenčina</option>
               </select>
             </div>
-
             <button class="s-apply" id="btnApply">${this._t('apply')}</button>
-
           </div>
         </div>
       </div>
@@ -623,9 +637,9 @@ class TvMediaCard extends HTMLElement {
       <div class="app-overlay" id="appOverlay">
         <div class="app-modal">
           <div class="app-head">
-            <div class="app-head-title">▶ ${this._t('launchApp')}</div>
+            <div class="app-head-title">${this._t('launchApp')}</div>
             <div style="display:flex;gap:6px;align-items:center;">
-              <button class="app-edit-btn" id="btnEditApps">Edit</button>
+              <button class="app-edit-btn" id="btnEditApps">${this._t('edit')}</button>
               <button class="app-close" id="appClose" aria-label="Close">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                   <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
@@ -633,16 +647,7 @@ class TvMediaCard extends HTMLElement {
               </button>
             </div>
           </div>
-          <div class="app-grid" id="appGrid">
-            <div class="add-form" id="addForm">
-              <input class="add-inp" id="addName" type="text" placeholder="App name (ex: YouTube)">
-              <input class="add-inp" id="addId" type="text" placeholder="Package ID (ex: com.google.android.youtube.tv)">
-              <div class="add-row">
-                <button class="add-save" id="addSave">Add</button>
-                <button class="add-cancel" id="addCancel">Cancel</button>
-              </div>
-            </div>
-          </div>
+          <div class="app-grid" id="appGrid"></div>
         </div>
       </div>
     `;
@@ -653,15 +658,14 @@ class TvMediaCard extends HTMLElement {
 
   // ── events ──────────────────────────────────────────────────────────────────
   _bindEvents() {
-    // Power — remote if available, else media_player
     this._$('pwr').addEventListener('click', () => {
       if (!this._hass) return;
-      const stObj2  = this._hass.states[this._cfg.entity];
-      const s2      = stObj2?.state;
-      const attr2   = stObj2?.attributes || {};
-      const assumed2    = attr2.assumed_state === true;
-      const hasLive2    = !!(attr2.app_id || attr2.app_name || attr2.media_title);
-      const currentlyOn = (assumed2 && hasLive2) ? true : (s2 !== 'off' && s2 !== 'unavailable');
+      const stObj  = this._hass.states[this._cfg.entity];
+      const s      = stObj?.state;
+      const attr   = stObj?.attributes || {};
+      const assumed    = attr.assumed_state === true;
+      const hasLive    = !!(attr.app_id || attr.app_name || attr.media_title);
+      const currentlyOn = (assumed && hasLive) ? true : (s !== 'off' && s !== 'unavailable');
       this._callMedia(currentlyOn ? 'turn_off' : 'turn_on');
     });
 
@@ -725,7 +729,7 @@ class TvMediaCard extends HTMLElement {
     this._$('btnEditApps').onclick = () => {
       this._editMode = !this._editMode;
       this._$('btnEditApps').classList.toggle('active', this._editMode);
-      this._$('btnEditApps').textContent = this._editMode ? 'Done' : 'Edit';
+      this._$('btnEditApps').textContent = this._editMode ? this._t('done') : this._t('edit');
       this._renderAppGrid();
     };
 
@@ -739,7 +743,6 @@ class TvMediaCard extends HTMLElement {
     const grid = this._$('appGrid');
     const editMode = this._editMode;
 
-    // Build app tiles
     let tilesHtml = apps.map((app, i) => {
       const logo = tvGetLogo(app.id);
       const isActive = currentAppId === app.id;
@@ -748,29 +751,25 @@ class TvMediaCard extends HTMLElement {
         ? `<div class="app-logo">${logo}</div>`
         : `<div class="app-logo"><div class="app-logo-fallback" style="background:hsl(${hue},55%,35%)">${app.name[0].toUpperCase()}</div></div>`;
       return `<div class="app-item${isActive ? ' active-app' : ''}" data-idx="${i}" data-app-id="${app.id}" draggable="${editMode}">
-        <button class="app-del" data-idx="${i}" title="Remove">×</button>
+        <button class="app-del" data-idx="${i}" title="Remove">&times;</button>
         ${logoHtml}
         <div class="app-name">${app.name}</div>
       </div>`;
     }).join('');
 
-    // Add button (always last)
-    tilesHtml += `<div class="app-item app-add" id="btnAddApp" title="Add app">+<div class="app-name">Add</div></div>`;
-
-    // Add form (hidden by default)
+    tilesHtml += `<div class="app-item app-add" id="btnAddApp" title="${this._t('add')}">+<div class="app-name">${this._t('add')}</div></div>`;
     tilesHtml += `<div class="add-form" id="addForm">
-      <input class="add-inp" id="addName" type="text" placeholder="App name (ex: YouTube)">
-      <input class="add-inp" id="addId" type="text" placeholder="Package ID (ex: com.google.android.youtube.tv)">
+      <input class="add-inp" id="addName" type="text" placeholder="${this._t('appName')} (ex: YouTube)">
+      <input class="add-inp" id="addId" type="text" placeholder="${this._t('packageId')} (ex: com.google.android.youtube.tv)">
       <div class="add-row">
-        <button class="add-save" id="addSave">Add</button>
-        <button class="add-cancel" id="addCancel">Cancel</button>
+        <button class="add-save" id="addSave">${this._t('add')}</button>
+        <button class="add-cancel" id="addCancel">${this._t('cancel')}</button>
       </div>
     </div>`;
 
     grid.innerHTML = tilesHtml;
     grid.classList.toggle('edit-mode', editMode);
 
-    // Launch on click (non-edit mode)
     grid.querySelectorAll('.app-item:not(.app-add)').forEach(el => {
       el.addEventListener('click', () => {
         if (this._editMode) return;
@@ -779,7 +778,6 @@ class TvMediaCard extends HTMLElement {
       });
     });
 
-    // Delete buttons
     grid.querySelectorAll('.app-del').forEach(btn => {
       btn.addEventListener('click', e => {
         e.stopPropagation();
@@ -791,34 +789,40 @@ class TvMediaCard extends HTMLElement {
       });
     });
 
-    // Add app button
-    this._$('btnAddApp').addEventListener('click', () => {
-      this._$('addForm').classList.add('open');
-      this._$('addName').focus();
-    });
+    const addBtn = this._$('btnAddApp');
+    if (addBtn) {
+      addBtn.addEventListener('click', () => {
+        const form = this._$('addForm');
+        if (form) { form.classList.add('open'); this._$('addName')?.focus(); }
+      });
+    }
 
-    // Save new app
-    this._$('addSave').addEventListener('click', () => {
-      const name = this._$('addName').value.trim();
-      const id   = this._$('addId').value.trim();
-      if (!name || !id) return;
-      const apps = this._getApps();
-      apps.push({ name, id });
-      this._saveApps(apps);
-      this._renderAppGrid();
-    });
+    const saveBtn = this._$('addSave');
+    if (saveBtn) {
+      saveBtn.addEventListener('click', () => {
+        const name = this._$('addName')?.value?.trim();
+        const id   = this._$('addId')?.value?.trim();
+        if (!name || !id) return;
+        const apps = this._getApps();
+        apps.push({ name, id });
+        this._saveApps(apps);
+        this._renderAppGrid();
+      });
+    }
 
-    this._$('addCancel').addEventListener('click', () => {
-      this._$('addForm').classList.remove('open');
-    });
+    const cancelBtn = this._$('addCancel');
+    if (cancelBtn) {
+      cancelBtn.addEventListener('click', () => {
+        this._$('addForm')?.classList.remove('open');
+      });
+    }
 
-    // Drag-to-reorder
     if (editMode) this._bindDrag(grid);
   }
 
   _bindDrag(grid) {
     let dragIdx = null;
-    grid.querySelectorAll('.app-item[draggable]').forEach(el => {
+    grid.querySelectorAll('.app-item[draggable="true"]').forEach(el => {
       el.addEventListener('dragstart', e => {
         dragIdx = +el.dataset.idx;
         el.style.opacity = '.4';
@@ -839,18 +843,6 @@ class TvMediaCard extends HTMLElement {
     });
   }
 
-  _getApps() {
-    const key = 'tvcard_apps_' + this._cfg.entity;
-    const stored = localStorage.getItem(key);
-    if (stored) { try { return JSON.parse(stored); } catch(e) {} }
-    return this._cfg.apps ? [...this._cfg.apps] : [...DEFAULT_APPS];
-  }
-
-  _saveApps(apps) {
-    const key = 'tvcard_apps_' + this._cfg.entity;
-    localStorage.setItem(key, JSON.stringify(apps));
-  }
-
   _closeApps() {
     this._$('appOverlay').classList.remove('open');
     this._editMode = false;
@@ -866,16 +858,11 @@ class TvMediaCard extends HTMLElement {
   }
 
   _openSettings() {
-    // Populate dropdowns fresh from live hass.states every time
     const mpEntities = this._domainEntities('media_player');
-
-    this._$('iEntity').innerHTML = this._buildOpts(mpEntities, this._cfg.entity,        false);
-
+    this._$('iEntity').innerHTML = this._buildOpts(mpEntities, this._cfg.entity, false);
     this._$('iName').value  = this._cfg.name  || '';
     this._$('iBrand').value = this._cfg.brand || '';
     this._$('iLang').value  = this._lang;
-
-
     this._$('overlay').classList.add('open');
   }
 
@@ -887,15 +874,14 @@ class TvMediaCard extends HTMLElement {
   _updateCard() {
     if (!this._hass) return;
     const sr = this.shadowRoot;
-    if (!sr.getElementById('dot')) return;
+    if (!sr || !sr.getElementById('dot')) return;
 
     const stObj = this._hass.states[this._cfg.entity];
     if (!stObj) return;
 
     const s          = stObj.state;
-    const attr       = stObj.attributes;
+    const attr       = stObj.attributes || {};
 
-    // When assumed_state:true HA can't read real state — treat as ON if we have live data
     const assumed    = attr.assumed_state === true;
     const hasLiveData = !!(attr.app_id || attr.app_name || attr.media_title);
     const isOn       = (assumed && hasLiveData)
@@ -915,18 +901,17 @@ class TvMediaCard extends HTMLElement {
     sr.getElementById('scrBg').style.opacity = isOn ? '1' : '.04';
     sr.getElementById('led').classList.toggle('off', !isOn);
 
-    // App logo + name — app_id is the canonical package name, more reliable than app_name
+    // App logo + name
     const rawApp  = (attr.app_id || attr.app_name || attr.source || '').trim();
     const appName = _isSystemString(rawApp) ? '' : rawApp;
-    const logo    = tvGetLogo(rawApp); // pass raw (pkg) for PKG_TABLE lookup, fallback alias
+    const logo    = tvGetLogo(rawApp);
     const showLogo = isOn && s !== 'idle' && !!logo;
 
     sr.getElementById('logoWrap').style.display = showLogo ? 'flex' : 'none';
     sr.getElementById('offMsg').style.display   = isOn     ? 'none' : 'flex';
-    sr.getElementById('homeWrap').style.display = (isOn && !showLogo) ? 'block' : 'none';
+    sr.getElementById('homeWrap').style.display = (isOn && !showLogo) ? 'grid' : 'none';
     if (showLogo) sr.getElementById('logoWrap').innerHTML = logo;
 
-    // Show friendly app name below: prefer app_name if it's not a system string, else blank
     const friendlyApp = attr.app_name && !_isSystemString(attr.app_name) ? attr.app_name : '';
     sr.getElementById('npApp').textContent   = showLogo ? (friendlyApp || appName).toUpperCase() : '';
     sr.getElementById('npTitle').textContent = attr.media_title || (s === 'idle' ? this._t('idle') : '—');
@@ -940,7 +925,6 @@ class TvMediaCard extends HTMLElement {
     sr.getElementById('tot').textContent = this._fmt(duration);
 
     if (isPlaying && duration > 0) {
-      // If HA has no timestamp yet (new track just started), trust position=0 to avoid stale value
       const snap = attr.media_position_updated_at ? (attr.media_position || 0) : 0;
       const ref  = attr.media_position_updated_at
         ? new Date(attr.media_position_updated_at).getTime()
@@ -963,7 +947,7 @@ class TvMediaCard extends HTMLElement {
       sr.getElementById('cur').textContent = this._fmt(pos);
     }
 
-    // Volume — bar shows real level even when muted (mute state shown separately)
+    // Volume
     const vol    = attr.volume_level    ?? 0;
     const muted  = attr.is_volume_muted ?? false;
     sr.getElementById('vfill').style.width  = (vol * 100).toFixed(1) + '%';
@@ -979,7 +963,6 @@ class TvMediaCard extends HTMLElement {
       svg.innerHTML = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>`;
     }
 
-    // Mute button icon — X when muted, speaker when not
     const muteIc = sr.getElementById('muteIc');
     const muteBtn = sr.getElementById('btnMute');
     if (muteIc && muteBtn) {
