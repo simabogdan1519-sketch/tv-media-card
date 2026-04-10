@@ -265,23 +265,13 @@ const TV_CSS = `
 
   /* BENTO HOME SCREEN */
   .bento-home { width:100%; height:100%; display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(5,1fr); gap:3px; padding:4px; box-sizing:border-box; position:absolute; inset:0; z-index:1; }
-  .bento-tile { border-radius:4px; overflow:hidden; display:flex; align-items:center; justify-content:center; transition: all .6s cubic-bezier(.4,0,.2,1); animation: btFade 4s ease-in-out infinite; opacity: .75; }
-  .bento-tile:nth-child(1)  { animation-delay: 0s; }
-  .bento-tile:nth-child(2)  { animation-delay: .5s; }
-  .bento-tile:nth-child(3)  { animation-delay: 1s; }
-  .bento-tile:nth-child(4)  { animation-delay: 1.5s; }
-  .bento-tile:nth-child(5)  { animation-delay: 2s; }
-  .bento-tile:nth-child(6)  { animation-delay: 2.5s; }
-  .bento-tile:nth-child(7)  { animation-delay: 3s; }
-  .bento-tile:nth-child(8)  { animation-delay: .8s; }
-  .bento-tile:nth-child(9)  { animation-delay: 1.3s; }
-  .bento-tile:nth-child(10) { animation-delay: 1.8s; }
-  .bento-tile:nth-child(11) { animation-delay: 2.3s; }
-  .bento-tile:nth-child(12) { animation-delay: 2.8s; }
-  @keyframes btFade { 0%,100%{opacity:.65;transform:scale(1)} 50%{opacity:1;transform:scale(1.02)} }
+  .bento-tile {
+    border-radius:4px; overflow:hidden; display:flex; align-items:center; justify-content:center;
+    opacity: .8; transition: opacity 1.2s ease, transform 1.2s ease;
+  }
   .bento-tile svg { max-width:65%; max-height:55%; width:auto; height:auto; }
-  .bento-tile.bt-swap { animation: btSwap .7s cubic-bezier(.4,0,.2,1); }
-  @keyframes btSwap { 0%{opacity:1;transform:scale(1)} 30%{opacity:0;transform:scale(.8)} 60%{opacity:0;transform:scale(.8)} 100%{opacity:1;transform:scale(1)} }
+  .bento-tile.bt-out { opacity: 0; transform: scale(.88); }
+  .bento-tile.bt-in  { opacity: .9; transform: scale(1); }
 
   .hint { position: absolute; inset: 0; border-radius: 8px; background: rgba(4,4,14,.76); display: flex; align-items: center; justify-content: center; gap: 7px; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 10; }
   .tv-click:hover .hint { opacity: 1; }
@@ -1070,21 +1060,21 @@ class TvMediaCard extends HTMLElement {
       if (!sr) return;
       const tiles = sr.querySelectorAll('.bento-tile');
       if (tiles.length < 4) return;
-      // Pick two random small tiles (skip index 0 and 6 which are large 2x2)
-      const smallIdxs = [];
-      for (let i = 0; i < tiles.length; i++) {
-        if (i !== 0 && i !== 6) smallIdxs.push(i);
-      }
-      if (smallIdxs.length < 2) return;
-      // Pick 2 random different indices
-      const a = smallIdxs[Math.floor(Math.random() * smallIdxs.length)];
+
+      // Pick 2 random different tiles — any tile, including large ones
+      const a = Math.floor(Math.random() * tiles.length);
       let b = a;
-      while (b === a) b = smallIdxs[Math.floor(Math.random() * smallIdxs.length)];
+      let tries = 0;
+      while (b === a && tries++ < 20) b = Math.floor(Math.random() * tiles.length);
+      if (a === b) return;
 
       const tA = tiles[a], tB = tiles[b];
-      // Swap inner HTML with animation
-      tA.classList.add('bt-swap');
-      tB.classList.add('bt-swap');
+
+      // Phase 1: both fade out slowly
+      tA.classList.add('bt-out');
+      tB.classList.add('bt-out');
+
+      // Phase 2: swap content at midpoint (when faded out)
       setTimeout(() => {
         const tmpHtml = tA.innerHTML;
         const tmpBg = tA.style.background;
@@ -1095,12 +1085,20 @@ class TvMediaCard extends HTMLElement {
         tB.innerHTML = tmpHtml;
         tB.style.background = tmpBg;
         tB.style.border = tmpBorder;
-      }, 300);
+
+        // Phase 3: fade back in
+        tA.classList.remove('bt-out');
+        tA.classList.add('bt-in');
+        tB.classList.remove('bt-out');
+        tB.classList.add('bt-in');
+      }, 1200);
+
+      // Phase 4: clean up classes
       setTimeout(() => {
-        tA.classList.remove('bt-swap');
-        tB.classList.remove('bt-swap');
-      }, 700);
-    }, 3500);
+        tA.classList.remove('bt-in');
+        tB.classList.remove('bt-in');
+      }, 2600);
+    }, 4000);
   }
 
   _stopBentoSwap() {
