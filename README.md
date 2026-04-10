@@ -2,7 +2,7 @@
 
 A premium custom Lovelace card for Home Assistant that displays your TV as an interactive media controller with a realistic TV design, app launcher, and full playback controls.
 
-![preview](preview.png)
+![preview](preview.gif)
 
 ## Features
 
