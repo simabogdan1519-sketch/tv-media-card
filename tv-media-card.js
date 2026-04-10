@@ -20,8 +20,8 @@
 
 // ─── I18N ─────────────────────────────────────────────────────────────────────
 const TV_I18N = {
-  en: { on:"On", off:"Off", standby:"STANDBY", nowPlaying:"Now Playing", settings:"Settings", cardSettings:"Card Settings", general:"General", roomName:"Room / Device Name", brand:"TV Brand", entity:"Media Player", castEntity:"Cast Entity (media info)", appearance:"Appearance", lang:"Language", apply:"Apply", idle:"Idle", unavailable:"Unavailable", launchApp:"Launch App", edit:"Edit", done:"Done", add:"Add", cancel:"Cancel", appName:"App name", packageId:"Package ID", volumeSteps:"Volume Display", volModePct:"Show as percentage (40%)", volModeSteps:"steps — show as level (10/25)", volumeStepsHint:"How volume is displayed. Google TV uses 25 steps.", none:"— none —"},
-  ro: { on:"Pornit", off:"Oprit", standby:"STANDBY", nowPlaying:"Se redă acum", settings:"Setări", cardSettings:"Setări Card", general:"General", roomName:"Cameră / Dispozitiv", brand:"Brand TV", entity:"Media Player", castEntity:"Entitate Cast (info media)", appearance:"Aspect", lang:"Limbă", apply:"Aplică", idle:"Inactiv", unavailable:"Indisponibil", launchApp:"Lansează Aplicație", edit:"Editează", done:"Gata", add:"Adaugă", cancel:"Anulează", appName:"Nume aplicație", packageId:"ID pachet", volumeSteps:"Afișare Volum", volModePct:"Afișează ca procent (40%)", volModeSteps:"trepte — afișează ca nivel (10/25)", volumeStepsHint:"Cum se afișează volumul. Google TV folosește 25 trepte.", none:"— fără —"},
+  en: { on:"On", off:"Off", standby:"STANDBY", nowPlaying:"Now Playing", settings:"Settings", cardSettings:"Card Settings", general:"General", roomName:"Room / Device Name", brand:"TV Brand", entity:"Media Player", castEntity:"Cast Entity (media info)", appearance:"Appearance", lang:"Language", apply:"Apply", idle:"Idle", unavailable:"Unavailable", launchApp:"Launch App", edit:"Edit", done:"Done", add:"Add", cancel:"Cancel", appName:"App name", packageId:"Package ID", volumeSteps:"Volume Display", volOpt0:"Percentage — shows 40%", volOpt15:"15 steps — shows 6/15", volOpt25:"25 steps — shows 10/25 (Google TV)", volOpt50:"50 steps — shows 20/50", volOpt100:"100 steps — shows 40/100", volumeStepsHint:"Match the number of steps your TV remote uses.", none:"— none —"},
+  ro: { on:"Pornit", off:"Oprit", standby:"STANDBY", nowPlaying:"Se redă acum", settings:"Setări", cardSettings:"Setări Card", general:"General", roomName:"Cameră / Dispozitiv", brand:"Brand TV", entity:"Media Player", castEntity:"Entitate Cast (info media)", appearance:"Aspect", lang:"Limbă", apply:"Aplică", idle:"Inactiv", unavailable:"Indisponibil", launchApp:"Lansează Aplicație", edit:"Editează", done:"Gata", add:"Adaugă", cancel:"Anulează", appName:"Nume aplicație", packageId:"ID pachet", volumeSteps:"Afișare Volum", volOpt0:"Procent — arată 40%", volOpt15:"15 trepte — arată 6/15", volOpt25:"25 trepte — arată 10/25 (Google TV)", volOpt50:"50 trepte — arată 20/50", volOpt100:"100 trepte — arată 40/100", volumeStepsHint:"Alege câte trepte de volum are telecomanda TV-ului.", none:"— fără —"},
   de: { on:"An", off:"Aus", standby:"STANDBY", nowPlaying:"Jetzt läuft", settings:"Einstellungen", cardSettings:"Karten-Einstellungen", general:"Allgemein", roomName:"Raum / Gerät", brand:"TV-Marke", entity:"Media Player", appearance:"Aussehen", lang:"Sprache", apply:"Anwenden", idle:"Inaktiv", unavailable:"Nicht verfügbar", launchApp:"App starten", edit:"Bearbeiten", done:"Fertig", add:"Hinzufügen", cancel:"Abbrechen", appName:"App-Name", packageId:"Paket-ID"},
   fr: { on:"Allumé", off:"Éteint", standby:"VEILLE", nowPlaying:"En cours", settings:"Paramètres", cardSettings:"Paramètres carte", general:"Général", roomName:"Pièce / Appareil", brand:"Marque TV", entity:"Media Player", appearance:"Apparence", lang:"Langue", apply:"Appliquer", idle:"Inactif", unavailable:"Indisponible", launchApp:"Lancer App", edit:"Modifier", done:"Terminé", add:"Ajouter", cancel:"Annuler", appName:"Nom de l'app", packageId:"ID du paquet"},
   es: { on:"Encendido", off:"Apagado", standby:"EN ESPERA", nowPlaying:"Reproduciendo", settings:"Ajustes", cardSettings:"Ajustes de tarjeta", general:"General", roomName:"Habitación / Dispositivo", brand:"Marca TV", entity:"Media Player", appearance:"Apariencia", lang:"Idioma", apply:"Aplicar", idle:"Inactivo", unavailable:"No disponible", launchApp:"Lanzar App", edit:"Editar", done:"Listo", add:"Añadir", cancel:"Cancelar", appName:"Nombre de app", packageId:"ID de paquete"},
@@ -636,11 +636,11 @@ class TvMediaCard extends HTMLElement {
             <div class="s-row">
               <div class="s-lbl">${this._t('volumeSteps')}</div>
               <select class="s-sel" id="iVolSteps">
-                <option value="0">% — ${this._t('volModePct')}</option>
-                <option value="15">15 ${this._t('volModeSteps')}</option>
-                <option value="25">25 ${this._t('volModeSteps')} (Google TV)</option>
-                <option value="50">50 ${this._t('volModeSteps')}</option>
-                <option value="100">100 ${this._t('volModeSteps')}</option>
+                <option value="0">${this._t('volOpt0')}</option>
+                <option value="15">${this._t('volOpt15')}</option>
+                <option value="25">${this._t('volOpt25')}</option>
+                <option value="50">${this._t('volOpt50')}</option>
+                <option value="100">${this._t('volOpt100')}</option>
               </select>
               <div style="font-size:10px;color:rgba(255,255,255,.25);margin-top:2px;">${this._t('volumeStepsHint')}</div>
             </div>
@@ -761,22 +761,27 @@ class TvMediaCard extends HTMLElement {
       const lang   = this._$('iLang').value;
       const volSteps = parseInt(this._$('iVolSteps').value, 10) || 0;
 
-      if (name)   { this._cfg.name  = name;   this._$('room').textContent  = name; }
-      if (brand)  { this._cfg.brand = brand;   this._$('brand').textContent = brand.toUpperCase(); }
-      if (entity) this._cfg.entity = entity;
+      // Update internal config — always set, even if empty
+      this._cfg.name = name || null;
+      this._cfg.brand = brand || '';
+      this._cfg.entity = entity;
       this._cfg.cast_entity = castEntity;
-      if (lang)   { this._lang = lang; this._cfg.language = lang; }
+      this._lang = lang;
+      this._cfg.language = lang;
       this._cfg.volume_steps = volSteps;
 
+      // Update UI immediately
+      this._$('room').textContent = name || this._hass?.states[entity]?.attributes?.friendly_name || entity;
+      this._$('brand').textContent = (brand || '').toUpperCase();
+
       // Persist to YAML — fire config-changed event so HA saves it
-      const newConfig = { type: 'custom:tv-media-card' };
-      if (this._cfg.entity)       newConfig.entity       = this._cfg.entity;
-      if (this._cfg.cast_entity)  newConfig.cast_entity  = this._cfg.cast_entity;
-      if (this._cfg.name)         newConfig.name         = this._cfg.name;
-      if (this._cfg.brand)        newConfig.brand        = this._cfg.brand;
-      if (this._cfg.language && this._cfg.language !== 'en') newConfig.language = this._cfg.language;
-      if (this._cfg.volume_steps) newConfig.volume_steps = this._cfg.volume_steps;
-      if (this._cfg.apps)         newConfig.apps         = this._cfg.apps;
+      const newConfig = { type: 'custom:tv-media-card', entity: entity };
+      if (castEntity)            newConfig.cast_entity  = castEntity;
+      if (name)                  newConfig.name         = name;
+      if (brand)                 newConfig.brand        = brand;
+      if (lang && lang !== 'en') newConfig.language     = lang;
+      if (volSteps)              newConfig.volume_steps = volSteps;
+      if (this._cfg.apps)        newConfig.apps         = this._cfg.apps;
       this.dispatchEvent(new CustomEvent('config-changed', { detail: { config: newConfig }, bubbles: true, composed: true }));
 
       this._closeSettings();
