@@ -47,7 +47,7 @@ const _LOGOS = {
   max       : () => `<svg fill="#ffffff" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"><path d="M7.042 16.896H4.414v-3.754H2.708v3.754H.01L0 7.22h2.708v3.6h1.706v-3.6h2.628zm12.043.046C21.795 16.94 24 14.689 24 11.978a4.89 4.89 0 0 0-4.915-4.92c-2.707-.002-4.09 1.991-4.432 2.795.003-1.207-1.187-2.632-2.58-2.634H7.59v9.674l4.181.001c1.686 0 2.886-1.46 2.888-2.713.385.788 1.72 2.762 4.427 2.76zm-7.665-3.936c.387 0 .692.382.692.817 0 .435-.305.817-.692.817h-1.33v-1.634zm.005-3.633c.387 0 .692.382.692.817 0 .436-.305.818-.692.818h-1.33V9.373zm1.77 2.607c.305-.039.813-.387.992-.61-.063.276-.068 1.074.006 1.35-.204-.314-.688-.701-.998-.74zm3.43 0a2.462 2.462 0 1 1 4.924 0 2.462 2.462 0 0 1-4.925 0zm2.462 1.936a1.936 1.936 0 1 0 0-3.872 1.936 1.936 0 0 0 0 3.872z"></path></svg>`,
   hulu      : () => `<svg viewBox="2.5 -97.50099999999999 295.003 295.003" xmlns="http://www.w3.org/2000/svg" fill="none"><linearGradient id="a" gradientUnits="userSpaceOnUse" x1="-895.929" y1="1218.797" x2="-895.929" y2="1121.555" gradientTransform="matrix(1 0 0 -1 1045.93 1220.176)"><stop offset="0" stop-color="#a3cc39"></stop><stop offset=".698" stop-color="#85bd40"></stop><stop offset="1" stop-color="#65ad45"></stop></linearGradient><path d="M297.5 31.698h-23.49v39.196c0 1.771-.684 3.274-1.775 4.508-1.094 1.093-2.596 1.639-4.366 1.771H254.21c-1.912-.137-3.415-.683-4.507-1.771-1.096-1.229-1.775-2.731-1.775-4.508V31.698h-23.49v41.245c.139 5.464 1.096 10.242 3.416 14.062 2.318 3.826 5.324 6.693 9.285 8.604 4.098 1.912 8.74 3.01 14.065 3.01h22.81v-.271c4.918 0 9.149-1.096 12.7-3.144 3.413-2.188 6.146-5.188 7.923-9.019 1.909-3.821 2.866-8.332 2.866-13.248l-.003-41.239zM62.456 34.157c-4.098-1.775-8.604-2.595-13.521-2.459h-15.16l-5.872.684c-1.366.409-2.049.683-2.049.683V1.379H2.5v97.242h23.354V59.286c.137-1.64.683-3.277 1.912-4.37s2.595-1.775 4.507-1.775h13.658c1.638 0 3.141.688 4.37 1.775 1.229 1.093 1.773 2.73 1.911 4.37v39.335h23.354V56.283c0-5.874-1.229-10.653-3.551-14.341-2.456-3.551-5.598-6.146-9.559-7.785zm79.485 36.738c-.137 1.772-.683 3.275-1.775 4.508-1.23 1.094-2.732 1.64-4.507 1.771h-13.658c-1.775-.137-3.277-.683-4.37-1.771-1.229-1.229-1.775-2.73-1.912-4.508V31.698H92.365v41.245c0 5.464 1.093 10.242 3.278 14.062 2.185 3.826 5.326 6.693 9.287 8.604 4.097 1.912 8.604 3.01 14.066 3.01h22.945v-.271c4.917 0 9.149-1.096 12.564-3.144 3.414-2.188 6.146-5.188 8.06-9.019 1.773-3.821 2.731-8.332 2.867-13.248V31.698h-23.491v39.197zm41.247 27.726h23.354V1.379h-23.354v97.242z" fill="url(#a)"></path></svg>`,
   dazn      : () => `<svg fill="#ffffff" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M19.697 11.052l1.032-3.459 1.052 3.459zM24.828 14.079l-2.697-8.172c-0.063-0.177-0.131-0.297-0.209-0.355-0.077-0.052-0.203-0.083-0.369-0.083h-1.495c-0.131-0.011-0.265 0.020-0.38 0.093-0.079 0.057-0.147 0.172-0.199 0.344l-2.724 8.172c-0.036 0.041-0.052 0.129-0.052 0.255 0 0.197 0.12 0.297 0.36 0.297h1.12c0.104 0 0.187 0 0.249-0.011 0.057-0.005 0.109-0.027 0.156-0.068 0.043-0.041 0.079-0.093 0.1-0.151 0.031-0.068 0.061-0.161 0.099-0.271l0.421-1.428h3.079l0.432 1.401c0.036 0.12 0.068 0.213 0.104 0.281 0.027 0.063 0.068 0.115 0.115 0.161 0.041 0.037 0.093 0.063 0.151 0.073h0.005c0.057 0.005 0.136 0.011 0.229 0.011h1.199c0.239 0 0.359-0.1 0.359-0.297 0-0.036 0-0.079-0.005-0.12-0.015-0.047-0.031-0.093-0.052-0.14zM23.505 17.369h-0.865c-0.224 0-0.369 0.032-0.443 0.095-0.072 0.067-0.109 0.197-0.109 0.396v4.848l-2.547-4.864c-0.099-0.204-0.203-0.333-0.301-0.391-0.1-0.057-0.271-0.084-0.521-0.084h-0.797c-0.224 0-0.369 0.032-0.443 0.095-0.072 0.067-0.109 0.197-0.109 0.396v8.181c0 0.199 0.037 0.328 0.104 0.391 0.068 0.063 0.215 0.099 0.439 0.099h0.875c0.224 0 0.369-0.036 0.443-0.099s0.109-0.192 0.109-0.391v-4.864l2.547 4.875c0.099 0.208 0.203 0.339 0.303 0.396 0.099 0.057 0.271 0.083 0.52 0.083h0.797c0.224 0 0.369-0.036 0.443-0.099s0.109-0.192 0.109-0.391v-8.181c0-0.199-0.036-0.329-0.109-0.396-0.073-0.063-0.219-0.095-0.443-0.095zM27.776 16.593l2.219 2.219v11.183h-27.989v-11.183l2.219-2.219c0.328-0.328 0.328-0.859 0-1.187l-2.219-2.219v-11.183h27.989v11.183l-2.224 2.219c-0.323 0.328-0.323 0.859 0 1.187zM32 0h-32v14.151l1.849 1.849-1.849 1.849v14.151h32v-14.151l-1.849-1.849 1.849-1.849zM14.229 24.625h-3.615l3.807-5.355c0.048-0.063 0.084-0.131 0.115-0.203 0.016-0.057 0.027-0.12 0.027-0.183v-1.025c0-0.199-0.036-0.329-0.109-0.396-0.073-0.063-0.224-0.095-0.448-0.095h-5.495c-0.199 0-0.328 0.037-0.385 0.109-0.063 0.073-0.095 0.224-0.095 0.453v0.776c0 0.229 0.032 0.38 0.095 0.453 0.057 0.073 0.187 0.109 0.385 0.109h3.391l-3.756 5.355c-0.088 0.099-0.135 0.229-0.14 0.359v1.057c0 0.199 0.036 0.328 0.109 0.391s0.224 0.099 0.443 0.099h5.667c0.197 0 0.328-0.036 0.391-0.109 0.057-0.072 0.088-0.228 0.088-0.457v-0.771c0-0.235-0.031-0.387-0.088-0.459-0.063-0.073-0.193-0.109-0.391-0.109zM12.541 10.979c0 0.349-0.020 0.647-0.068 0.881-0.047 0.233-0.124 0.427-0.228 0.572-0.109 0.147-0.256 0.251-0.428 0.308-0.208 0.067-0.427 0.093-0.645 0.088h-1.057v-5.557h1.057c0.484 0 0.839 0.145 1.052 0.432s0.317 0.761 0.317 1.423zM14.385 7.26c-0.303-0.609-0.713-1.063-1.229-1.353-0.52-0.292-1.172-0.437-1.959-0.437h-2.64c-0.224 0-0.369 0.036-0.443 0.099s-0.109 0.192-0.109 0.391v8.181c0 0.199 0.036 0.329 0.109 0.396 0.073 0.063 0.219 0.095 0.443 0.095h2.959c1.396 0 2.353-0.595 2.864-1.787 0.12-0.276 0.204-0.552 0.251-0.828 0.052-0.355 0.077-0.709 0.072-1.063v-1.74c0-0.489-0.020-0.875-0.072-1.156-0.043-0.281-0.131-0.557-0.256-0.817l0.005 0.020z"></path></svg>`,
-  videoland : () => `<svg viewBox="0 0 155 48" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="46" height="46" rx="10" fill="#E4002B"/><polygon points="15,10 15,38 38,24" fill="#fff"/></svg>`,
+  ytmusic   : () => `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="47.5" fill="#FF0000"/><circle cx="50" cy="50" r="27.27" fill="#FF0000"/><circle cx="50" cy="50" r="24.16" fill="#FF0000"/><path fill="#fff" d="M41.055,52.528c-0.001,2.575,0.001,7.867,0,10.46l21.802-13.417L41.055,37.272V52.528z"/></svg>`,
 };
 
 // ─── LOGO LOOKUP ──────────────────────────────────────────────────────────────
@@ -88,7 +88,7 @@ const _PKG_TABLE = {
   'com.hulu.livingroomplus':              'hulu',
   'com.hulu.plus':                        'hulu',
   'com.dazn.mobile':                      'dazn',
-  'nl.rtl.videoland':                     'videoland',
+  'com.google.android.apps.youtube.music': 'ytmusic',
 };
 
 const _ALIAS_TABLE = [
@@ -103,7 +103,7 @@ const _ALIAS_TABLE = [
   { terms: ['hbo', ' max '],        key: 'max'       },
   { terms: ['hulu'],                key: 'hulu'      },
   { terms: ['dazn'],                key: 'dazn'      },
-  { terms: ['videoland'],           key: 'videoland' },
+  { terms: ['youtube music', 'ytmusic'],  key: 'ytmusic'  },
 ];
 
 function tvGetLogo(appName) {
@@ -141,7 +141,7 @@ const DEFAULT_APPS = [
   { name: 'Max',         id: 'com.wbd.stream'                    },
   { name: 'Hulu',        id: 'com.hulu.livingroomplus'           },
   { name: 'DAZN',        id: 'com.dazn.mobile'                   },
-  { name: 'Videoland',   id: 'nl.rtl.videoland'                  },
+  { name: 'YT Music',   id: 'com.google.android.apps.youtube.music' },
 ];
 
 // ─── BENTO GRID LAYOUT ───────────────────────────────────────────────────────
@@ -265,9 +265,23 @@ const TV_CSS = `
 
   /* BENTO HOME SCREEN */
   .bento-home { width:100%; height:100%; display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(5,1fr); gap:3px; padding:4px; box-sizing:border-box; position:absolute; inset:0; z-index:1; }
-  .bento-tile { border-radius:4px; overflow:hidden; display:flex; align-items:center; justify-content:center; transition: all .2s; }
+  .bento-tile { border-radius:4px; overflow:hidden; display:flex; align-items:center; justify-content:center; transition: all .6s cubic-bezier(.4,0,.2,1); animation: btFade 4s ease-in-out infinite; opacity: .75; }
+  .bento-tile:nth-child(1)  { animation-delay: 0s; }
+  .bento-tile:nth-child(2)  { animation-delay: .5s; }
+  .bento-tile:nth-child(3)  { animation-delay: 1s; }
+  .bento-tile:nth-child(4)  { animation-delay: 1.5s; }
+  .bento-tile:nth-child(5)  { animation-delay: 2s; }
+  .bento-tile:nth-child(6)  { animation-delay: 2.5s; }
+  .bento-tile:nth-child(7)  { animation-delay: 3s; }
+  .bento-tile:nth-child(8)  { animation-delay: .8s; }
+  .bento-tile:nth-child(9)  { animation-delay: 1.3s; }
+  .bento-tile:nth-child(10) { animation-delay: 1.8s; }
+  .bento-tile:nth-child(11) { animation-delay: 2.3s; }
+  .bento-tile:nth-child(12) { animation-delay: 2.8s; }
+  @keyframes btFade { 0%,100%{opacity:.65;transform:scale(1)} 50%{opacity:1;transform:scale(1.02)} }
   .bento-tile svg { max-width:65%; max-height:55%; width:auto; height:auto; }
-  .bento-tile:hover { filter:brightness(1.3); }
+  .bento-tile.bt-swap { animation: btSwap .7s cubic-bezier(.4,0,.2,1); }
+  @keyframes btSwap { 0%{opacity:1;transform:scale(1)} 30%{opacity:0;transform:scale(.8)} 60%{opacity:0;transform:scale(.8)} 100%{opacity:1;transform:scale(1)} }
 
   .hint { position: absolute; inset: 0; border-radius: 8px; background: rgba(4,4,14,.76); display: flex; align-items: center; justify-content: center; gap: 7px; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 10; }
   .tv-click:hover .hint { opacity: 1; }
@@ -1039,6 +1053,60 @@ class TvMediaCard extends HTMLElement {
       muteIc.innerHTML = muted
         ? `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>`
         : `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>`;
+    }
+
+    // Start/stop bento tile swap animation
+    if (isOn && !showLogo) {
+      this._startBentoSwap();
+    } else {
+      this._stopBentoSwap();
+    }
+  }
+
+  _startBentoSwap() {
+    if (this._bentoInterval) return;
+    this._bentoInterval = setInterval(() => {
+      const sr = this.shadowRoot;
+      if (!sr) return;
+      const tiles = sr.querySelectorAll('.bento-tile');
+      if (tiles.length < 4) return;
+      // Pick two random small tiles (skip index 0 and 6 which are large 2x2)
+      const smallIdxs = [];
+      for (let i = 0; i < tiles.length; i++) {
+        if (i !== 0 && i !== 6) smallIdxs.push(i);
+      }
+      if (smallIdxs.length < 2) return;
+      // Pick 2 random different indices
+      const a = smallIdxs[Math.floor(Math.random() * smallIdxs.length)];
+      let b = a;
+      while (b === a) b = smallIdxs[Math.floor(Math.random() * smallIdxs.length)];
+
+      const tA = tiles[a], tB = tiles[b];
+      // Swap inner HTML with animation
+      tA.classList.add('bt-swap');
+      tB.classList.add('bt-swap');
+      setTimeout(() => {
+        const tmpHtml = tA.innerHTML;
+        const tmpBg = tA.style.background;
+        const tmpBorder = tA.style.border;
+        tA.innerHTML = tB.innerHTML;
+        tA.style.background = tB.style.background;
+        tA.style.border = tB.style.border;
+        tB.innerHTML = tmpHtml;
+        tB.style.background = tmpBg;
+        tB.style.border = tmpBorder;
+      }, 300);
+      setTimeout(() => {
+        tA.classList.remove('bt-swap');
+        tB.classList.remove('bt-swap');
+      }, 700);
+    }, 3500);
+  }
+
+  _stopBentoSwap() {
+    if (this._bentoInterval) {
+      clearInterval(this._bentoInterval);
+      this._bentoInterval = null;
     }
   }
 }
