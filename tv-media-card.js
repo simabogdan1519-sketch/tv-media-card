@@ -432,6 +432,14 @@ class TvMediaCard extends HTMLElement {
     this._updateCard();
   }
 
+  disconnectedCallback() {
+    this._stopBentoSwap();
+    if (this._raf) {
+      cancelAnimationFrame(this._raf);
+      this._raf = null;
+    }
+  }
+
   getCardSize() { return 6; }
 
   // ── helpers ─────────────────────────────────────────────────────────────────
