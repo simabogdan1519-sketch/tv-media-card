@@ -203,7 +203,7 @@ const TV_CSS = `
     background-size: cover; background-position: center;
     filter: blur(28px) brightness(.35) saturate(1.4);
     transform: scale(1.15);
-    opacity: 0; transition: opacity .8s ease;
+    opacity: 0; transition: opacity .6s cubic-bezier(.2, .8, .2, 1);
     pointer-events: none;
   }
   .card-bg.active { opacity: 1; }
@@ -274,10 +274,10 @@ const TV_CSS = `
   .screen.on { box-shadow: inset 0 0 18px rgba(0,0,0,.4), 0 0 0 1.5px rgba(0,0,0,.7), 0 0 28px rgba(99,102,241,.06); }
   .scr-bg { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; transition: opacity .5s; }
   .scr-bg::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 28%; background: linear-gradient(180deg, rgba(255,255,255,.032) 0%, transparent 100%); border-radius: 8px 8px 0 0; pointer-events: none; }
-  .scr-poster { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 0; opacity: 0; transition: opacity .5s; }
+  .scr-poster { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 0; opacity: 0; transition: opacity .5s cubic-bezier(.2, .8, .2, 1); }
   .scr-poster.active { opacity: 1; }
   .scr-poster::after { content:''; position:absolute; inset:0; background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,.4) 100%); pointer-events:none; }
-  .scr-app-badge { position: absolute; top: 6px; right: 6px; z-index: 3; width: 28px; height: 28px; background: rgba(0,0,0,.55); backdrop-filter: blur(6px); border-radius: 6px; display: flex; align-items: center; justify-content: center; padding: 4px; opacity: 0; transition: opacity .4s; pointer-events: none; }
+  .scr-app-badge { position: absolute; top: 6px; right: 6px; z-index: 3; width: 28px; height: 28px; background: rgba(0,0,0,.55); backdrop-filter: blur(6px); border-radius: 6px; display: flex; align-items: center; justify-content: center; padding: 4px; opacity: 0; transition: opacity .35s cubic-bezier(.2, .8, .2, 1); pointer-events: none; }
   .scr-app-badge.active { opacity: 1; }
   .scr-app-badge svg { width: 100%; height: 100%; object-fit: contain; display: block; }
   .logo-wrap { display:flex; align-items:center; justify-content:center; z-index:1; width:80%; height:60%; }
@@ -1015,7 +1015,8 @@ class TvMediaCard extends HTMLElement {
     // App logo + name — prefer main entity for app_id (remote knows the app)
     const rawApp  = (attr.app_id || attr.app_name || castAttr.app_name || attr.source || '').trim();
     const appName = _isSystemString(rawApp) ? '' : rawApp;
-    const logo    = tvGetLogo(rawApp);
+    // Try logo from app_id first, then app_name (AndroidNativeApp won't match, but "Plex" will)
+    const logo    = tvGetLogo(rawApp) || tvGetLogo(attr.app_name || '') || tvGetLogo(castAttr.app_name || '');
     const showLogo = isOn && s !== 'idle' && !!logo;
 
     // Entity picture (media artwork) — from cast entity or main entity
@@ -1025,7 +1026,7 @@ class TvMediaCard extends HTMLElement {
     // Background blur image on the card
     const cardBg = sr.getElementById('cardBg');
     if (hasPoster) {
-      cardBg.style.backgroundImage = `url(${entityPic})`;
+      cardBg.style.backgroundImage = `url("${entityPic}")`;
       cardBg.classList.add('active');
     } else {
       cardBg.classList.remove('active');
@@ -1034,7 +1035,7 @@ class TvMediaCard extends HTMLElement {
     // Screen poster (artwork on TV screen)
     const scrPoster = sr.getElementById('scrPoster');
     if (hasPoster) {
-      scrPoster.style.backgroundImage = `url(${entityPic})`;
+      scrPoster.style.backgroundImage = `url("${entityPic}")`;
       scrPoster.classList.add('active');
     } else {
       scrPoster.classList.remove('active');
@@ -1057,7 +1058,7 @@ class TvMediaCard extends HTMLElement {
     if (showFullLogo) sr.getElementById('logoWrap').innerHTML = logo;
 
     const friendlyApp = attr.app_name && !_isSystemString(attr.app_name) ? attr.app_name : '';
-    sr.getElementById('npApp').textContent   = showLogo ? (friendlyApp || appName).toUpperCase() : '';
+    sr.getElementById('npApp').textContent   = (showLogo || hasPoster) ? (friendlyApp || appName).toUpperCase() : '';
 
     // Media title — prefer cast entity (it has the actual track/video title)
     const mediaTitle = castAttr.media_title || attr.media_title || '';
