@@ -1020,20 +1020,39 @@ class TvMediaCard extends HTMLElement {
     const showLogo = isOn && s !== 'idle' && !!logo;
 
     // Entity picture (media artwork) — prefer HA proxy paths (no CORS issues)
-    const castPicLocal = castObj ? (castAttr.entity_picture_local || castAttr.entity_picture) : '';
-    const mainPicLocal = attr.entity_picture_local || attr.entity_picture || '';
-    const entityPic = castPicLocal || mainPicLocal;
+    // HA can store entity_picture at state level OR in attributes
+    const _pic = (obj) => obj?.attributes?.entity_picture_local || obj?.attributes?.entity_picture || '';
+    
+    // Try cast entity first, then main entity
+    let entityPic = _pic(castObj) || _pic(stObj);
+    
+    // If still no picture, scan for a related media_player entity that has one
+    // (e.g. Plex creates a separate entity with the artwork)
+    if (!entityPic && this._hass) {
+      const mediaTitle = castAttr.media_title || attr.media_title || '';
+      for (const eid of Object.keys(this._hass.states)) {
+        if (!eid.startsWith('media_player.')) continue;
+        if (eid === this._cfg.entity || eid === this._cfg.cast_entity) continue;
+        const st = this._hass.states[eid];
+        if (st.state !== 'playing' && st.state !== 'paused') continue;
+        const pic = st.attributes?.entity_picture_local || st.attributes?.entity_picture;
+        if (!pic) continue;
+        // Match by media_title or app_name
+        const stTitle = st.attributes?.media_title || '';
+        const stApp = st.attributes?.app_name || '';
+        if ((mediaTitle && stTitle && mediaTitle === stTitle) ||
+            (attr.app_name && stApp && attr.app_name.toLowerCase() === stApp.toLowerCase())) {
+          entityPic = pic;
+          break;
+        }
+      }
+    }
+    
     const hasPoster = isOn && !!entityPic && (isPlaying || isPaused);
 
     console.log('[tv-media-card] DEBUG poster:', {
       state: s, isOn, isPlaying, isPaused,
-      castEid: this._cfg.cast_entity,
-      hasCastObj: !!castObj,
-      'attr.entity_picture_local': attr.entity_picture_local || '(none)',
-      'attr.entity_picture': attr.entity_picture || '(none)',
-      'castAttr.entity_picture_local': castAttr.entity_picture_local || '(none)',
-      'castAttr.entity_picture': castAttr.entity_picture || '(none)',
-      castPicLocal, mainPicLocal, entityPic,
+      entityPic: entityPic || '(none)',
       hasPoster
     });
 
