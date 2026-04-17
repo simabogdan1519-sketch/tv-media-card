@@ -272,12 +272,12 @@ const TV_CSS = `
     box-shadow: inset 0 0 28px rgba(0,0,0,.85), 0 0 0 1.5px rgba(0,0,0,.7);
   }
   .screen.on { box-shadow: inset 0 0 18px rgba(0,0,0,.4), 0 0 0 1.5px rgba(0,0,0,.7), 0 0 28px rgba(99,102,241,.06); }
-  .scr-bg { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; transition: opacity .5s; }
+  .scr-bg { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; transition: opacity .5s; z-index: 1; }
   .scr-bg::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 28%; background: linear-gradient(180deg, rgba(255,255,255,.032) 0%, transparent 100%); border-radius: 8px 8px 0 0; pointer-events: none; }
-  .scr-poster { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 0; opacity: 0; transition: opacity .5s cubic-bezier(.2, .8, .2, 1); }
+  .scr-poster { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 5; opacity: 0; transition: opacity .5s cubic-bezier(.2, .8, .2, 1); }
   .scr-poster.active { opacity: 1; }
   .scr-poster::after { content:''; position:absolute; inset:0; background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,.4) 100%); pointer-events:none; }
-  .scr-app-badge { position: absolute; top: 6px; right: 6px; z-index: 3; width: 28px; height: 28px; background: rgba(0,0,0,.55); backdrop-filter: blur(6px); border-radius: 6px; display: flex; align-items: center; justify-content: center; padding: 4px; opacity: 0; transition: opacity .35s cubic-bezier(.2, .8, .2, 1); pointer-events: none; }
+  .scr-app-badge { position: absolute; top: 6px; right: 6px; z-index: 6; width: 28px; height: 28px; background: rgba(0,0,0,.55); backdrop-filter: blur(6px); border-radius: 6px; display: flex; align-items: center; justify-content: center; padding: 4px; opacity: 0; transition: opacity .35s cubic-bezier(.2, .8, .2, 1); pointer-events: none; }
   .scr-app-badge.active { opacity: 1; }
   .scr-app-badge svg { width: 100%; height: 100%; object-fit: contain; display: block; }
   .logo-wrap { display:flex; align-items:center; justify-content:center; z-index:1; width:80%; height:60%; }
@@ -1030,6 +1030,8 @@ class TvMediaCard extends HTMLElement {
     // (e.g. Plex creates a separate entity with the artwork)
     if (!entityPic && this._hass) {
       const mediaTitle = castAttr.media_title || attr.media_title || '';
+      const currentApp = (attr.app_name || '').toLowerCase();
+      let fallbackPic = '';
       for (const eid of Object.keys(this._hass.states)) {
         if (!eid.startsWith('media_player.')) continue;
         if (eid === this._cfg.entity || eid === this._cfg.cast_entity) continue;
@@ -1037,18 +1039,50 @@ class TvMediaCard extends HTMLElement {
         if (st.state !== 'playing' && st.state !== 'paused') continue;
         const pic = st.attributes?.entity_picture_local || st.attributes?.entity_picture;
         if (!pic) continue;
-        // Match by media_title or app_name
         const stTitle = st.attributes?.media_title || '';
-        const stApp = st.attributes?.app_name || '';
-        if ((mediaTitle && stTitle && mediaTitle === stTitle) ||
-            (attr.app_name && stApp && attr.app_name.toLowerCase() === stApp.toLowerCase())) {
+        const stApp = (st.attributes?.app_name || '').toLowerCase();
+        // Strong match: same media title
+        if (mediaTitle && stTitle && mediaTitle === stTitle) {
           entityPic = pic;
           break;
         }
+        // Medium match: same app name
+        if (currentApp && stApp && currentApp === stApp) {
+          entityPic = pic;
+          break;
+        }
+        // Weak match: entity id contains the app name (e.g. media_player.plex_...)
+        if (currentApp && eid.toLowerCase().includes(currentApp)) {
+          entityPic = pic;
+          break;
+        }
+        // Fallback: any playing entity with a picture
+        if (!fallbackPic) fallbackPic = pic;
       }
+      if (!entityPic) entityPic = fallbackPic;
     }
     
     const hasPoster = isOn && !!entityPic && (isPlaying || isPaused);
+
+    // DEBUG: dump ALL media_player entities and their picture attributes
+    if (this._hass && !this._debugDumped) {
+      this._debugDumped = true;
+      const dump = {};
+      for (const eid of Object.keys(this._hass.states)) {
+        if (!eid.startsWith('media_player.')) continue;
+        const st = this._hass.states[eid];
+        const a = st.attributes || {};
+        dump[eid] = {
+          state: st.state,
+          entity_picture_local: a.entity_picture_local || null,
+          entity_picture: a.entity_picture || null,
+          media_title: a.media_title || null,
+          app_name: a.app_name || null,
+          app_id: a.app_id || null,
+        };
+      }
+      console.log('[tv-media-card] ALL media_players:', JSON.stringify(dump, null, 2));
+    }
 
     console.log('[tv-media-card] DEBUG poster:', {
       state: s, isOn, isPlaying, isPaused,
