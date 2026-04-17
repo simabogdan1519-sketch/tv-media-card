@@ -1019,8 +1019,10 @@ class TvMediaCard extends HTMLElement {
     const logo    = tvGetLogo(rawApp) || tvGetLogo(attr.app_name || '') || tvGetLogo(castAttr.app_name || '');
     const showLogo = isOn && s !== 'idle' && !!logo;
 
-    // Entity picture (media artwork) — from cast entity or main entity
-    const entityPic = castAttr.entity_picture || attr.entity_picture_local || attr.entity_picture || '';
+    // Entity picture (media artwork) — prefer HA proxy paths (no CORS issues)
+    const castPicLocal = castObj ? (castAttr.entity_picture_local || castAttr.entity_picture) : '';
+    const mainPicLocal = attr.entity_picture_local || attr.entity_picture || '';
+    const entityPic = castPicLocal || mainPicLocal;
     const hasPoster = isOn && !!entityPic && (isPlaying || isPaused);
 
     // Background blur image on the card
