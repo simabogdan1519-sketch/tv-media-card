@@ -198,11 +198,26 @@ const TV_CSS = `
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     color: #fff;
   }
+  .card-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-size: cover; background-position: center;
+    filter: blur(28px) brightness(.35) saturate(1.4);
+    transform: scale(1.15);
+    opacity: 0; transition: opacity .8s ease;
+    pointer-events: none;
+  }
+  .card-bg.active { opacity: 1; }
+  .card-bg::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(16,16,30,.55) 0%, rgba(16,16,30,.75) 50%, rgba(16,16,30,.92) 100%);
+    pointer-events: none;
+  }
+  .card > *:not(.card-bg) { position: relative; z-index: 1; }
   .card::before {
     content: ''; position: absolute; top: -60px; right: -60px;
     width: 200px; height: 200px;
     background: radial-gradient(circle, rgba(99,102,241,.12) 0%, transparent 70%);
-    pointer-events: none;
+    pointer-events: none; z-index: 1;
   }
 
   /* HEADER */
@@ -259,6 +274,12 @@ const TV_CSS = `
   .screen.on { box-shadow: inset 0 0 18px rgba(0,0,0,.4), 0 0 0 1.5px rgba(0,0,0,.7), 0 0 28px rgba(99,102,241,.06); }
   .scr-bg { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; transition: opacity .5s; }
   .scr-bg::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 28%; background: linear-gradient(180deg, rgba(255,255,255,.032) 0%, transparent 100%); border-radius: 8px 8px 0 0; pointer-events: none; }
+  .scr-poster { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 0; opacity: 0; transition: opacity .5s; }
+  .scr-poster.active { opacity: 1; }
+  .scr-poster::after { content:''; position:absolute; inset:0; background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,.4) 100%); pointer-events:none; }
+  .scr-app-badge { position: absolute; top: 6px; right: 6px; z-index: 3; width: 28px; height: 28px; background: rgba(0,0,0,.55); backdrop-filter: blur(6px); border-radius: 6px; display: flex; align-items: center; justify-content: center; padding: 4px; opacity: 0; transition: opacity .4s; pointer-events: none; }
+  .scr-app-badge.active { opacity: 1; }
+  .scr-app-badge svg { width: 100%; height: 100%; object-fit: contain; display: block; }
   .logo-wrap { display:flex; align-items:center; justify-content:center; z-index:1; width:80%; height:60%; }
   .logo-wrap svg { display:block; width:100%; height:100%; object-fit:contain; }
   .off-msg { font-size: 11px; color: rgba(255,255,255,.14); letter-spacing: 1.5px; text-transform: uppercase; }
@@ -505,6 +526,7 @@ class TvMediaCard extends HTMLElement {
       <style>${TV_CSS}</style>
 
       <div class="card">
+        <div class="card-bg" id="cardBg"></div>
 
         <div class="hdr">
           <div>
@@ -540,6 +562,8 @@ class TvMediaCard extends HTMLElement {
           <div class="tv-click" id="tvClick">
             <div class="tv-body">
               <div class="screen" id="scr">
+                <div class="scr-poster" id="scrPoster"></div>
+                <div class="scr-app-badge" id="scrAppBadge"></div>
                 <div class="scr-bg" id="scrBg" style="opacity:.04">
                   <div class="logo-wrap" id="logoWrap" style="display:none"></div>
                   <div id="offMsg" style="display:flex">
@@ -994,10 +1018,43 @@ class TvMediaCard extends HTMLElement {
     const logo    = tvGetLogo(rawApp);
     const showLogo = isOn && s !== 'idle' && !!logo;
 
-    sr.getElementById('logoWrap').style.display = showLogo ? 'flex' : 'none';
+    // Entity picture (media artwork) — from cast entity or main entity
+    const entityPic = castAttr.entity_picture || attr.entity_picture_local || attr.entity_picture || '';
+    const hasPoster = isOn && !!entityPic && (isPlaying || isPaused);
+
+    // Background blur image on the card
+    const cardBg = sr.getElementById('cardBg');
+    if (hasPoster) {
+      cardBg.style.backgroundImage = `url(${entityPic})`;
+      cardBg.classList.add('active');
+    } else {
+      cardBg.classList.remove('active');
+    }
+
+    // Screen poster (artwork on TV screen)
+    const scrPoster = sr.getElementById('scrPoster');
+    if (hasPoster) {
+      scrPoster.style.backgroundImage = `url(${entityPic})`;
+      scrPoster.classList.add('active');
+    } else {
+      scrPoster.classList.remove('active');
+    }
+
+    // App badge (small logo in top-right corner of screen)
+    const scrAppBadge = sr.getElementById('scrAppBadge');
+    if (hasPoster && logo) {
+      scrAppBadge.innerHTML = logo;
+      scrAppBadge.classList.add('active');
+    } else {
+      scrAppBadge.classList.remove('active');
+    }
+
+    // Full-screen logo only when no poster available
+    const showFullLogo = showLogo && !hasPoster;
+    sr.getElementById('logoWrap').style.display = showFullLogo ? 'flex' : 'none';
     sr.getElementById('offMsg').style.display   = isOn     ? 'none' : 'flex';
-    sr.getElementById('homeWrap').style.display = (isOn && !showLogo) ? 'grid' : 'none';
-    if (showLogo) sr.getElementById('logoWrap').innerHTML = logo;
+    sr.getElementById('homeWrap').style.display = (isOn && !showFullLogo && !hasPoster) ? 'grid' : 'none';
+    if (showFullLogo) sr.getElementById('logoWrap').innerHTML = logo;
 
     const friendlyApp = attr.app_name && !_isSystemString(attr.app_name) ? attr.app_name : '';
     sr.getElementById('npApp').textContent   = showLogo ? (friendlyApp || appName).toUpperCase() : '';
