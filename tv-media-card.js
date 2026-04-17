@@ -1025,6 +1025,18 @@ class TvMediaCard extends HTMLElement {
     const entityPic = castPicLocal || mainPicLocal;
     const hasPoster = isOn && !!entityPic && (isPlaying || isPaused);
 
+    console.log('[tv-media-card] DEBUG poster:', {
+      state: s, isOn, isPlaying, isPaused,
+      castEid: this._cfg.cast_entity,
+      hasCastObj: !!castObj,
+      'attr.entity_picture_local': attr.entity_picture_local || '(none)',
+      'attr.entity_picture': attr.entity_picture || '(none)',
+      'castAttr.entity_picture_local': castAttr.entity_picture_local || '(none)',
+      'castAttr.entity_picture': castAttr.entity_picture || '(none)',
+      castPicLocal, mainPicLocal, entityPic,
+      hasPoster
+    });
+
     // Background blur image on the card
     const cardBg = sr.getElementById('cardBg');
     if (hasPoster) {
