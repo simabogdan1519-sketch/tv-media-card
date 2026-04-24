@@ -236,20 +236,21 @@ const TV_CSS = `
   .tv-click { cursor: pointer; display: inline-flex; flex-direction: column; align-items: center; overflow: visible; }
   .tv-body {
     width: 316px;
-    background: linear-gradient(160deg, #222232 0%, #131320 100%);
-    border-radius: 18px 18px 8px 8px; border: 2px solid rgba(255,255,255,.09);
+    background: linear-gradient(160deg, #e8ebe5 0%, #d8dcd4 100%);
+    border-radius: 18px 18px 8px 8px;
+    border: 2px solid rgba(0,0,0,.07);
     padding: 12px 12px 0; position: relative;
     box-shadow:
-      inset 0 2px 0 rgba(255,255,255,.05), inset 0 -2px 0 rgba(0,0,0,.25),
-      5px 8px 20px rgba(0,0,0,.2), -5px 8px 20px rgba(0,0,0,.15), 0 20px 50px rgba(0,0,0,.18);
+      inset 0 2px 0 rgba(255,255,255,.7), inset 0 -2px 0 rgba(0,0,0,.08),
+      5px 8px 20px rgba(0,0,0,.08), -5px 8px 20px rgba(0,0,0,.06), 0 20px 40px rgba(0,0,0,.09);
     transition: border-color .2s, box-shadow .2s;
   }
   .tv-click:hover .tv-body {
-    border-color: rgba(122,184,139,.35);
+    border-color: rgba(122,184,139,.45);
     box-shadow:
-      inset 0 2px 0 rgba(255,255,255,.05), inset 0 -2px 0 rgba(0,0,0,.25),
-      5px 8px 20px rgba(0,0,0,.2), -5px 8px 20px rgba(0,0,0,.15), 0 20px 50px rgba(0,0,0,.18),
-      0 0 0 1px rgba(122,184,139,.18);
+      inset 0 2px 0 rgba(255,255,255,.7), inset 0 -2px 0 rgba(0,0,0,.08),
+      5px 8px 20px rgba(0,0,0,.08), -5px 8px 20px rgba(0,0,0,.06), 0 20px 40px rgba(0,0,0,.09),
+      0 0 0 1px rgba(122,184,139,.2);
   }
 
   .screen {
@@ -257,7 +258,7 @@ const TV_CSS = `
     border-radius: 8px; overflow: hidden; position: relative; transition: box-shadow .4s;
     box-shadow: inset 0 0 28px rgba(0,0,0,.85), 0 0 0 1.5px rgba(0,0,0,.7);
   }
-  .screen.on { box-shadow: inset 0 0 18px rgba(0,0,0,.4), 0 0 0 1.5px rgba(0,0,0,.7), 0 0 28px rgba(122,184,139,.06); }
+  .screen.on { box-shadow: inset 0 0 18px rgba(0,0,0,.4), 0 0 0 1.5px rgba(0,0,0,.5), 0 0 24px rgba(122,184,139,.08); }
   .scr-bg { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; transition: opacity .5s; }
   .scr-bg::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 28%; background: linear-gradient(180deg, rgba(255,255,255,.032) 0%, transparent 100%); border-radius: 8px 8px 0 0; pointer-events: none; }
   .logo-wrap { display:flex; align-items:center; justify-content:center; z-index:1; width:80%; height:60%; }
@@ -280,13 +281,13 @@ const TV_CSS = `
   .hint svg { width: 13px; height: 13px; opacity: .7; }
 
   .bezel { display: flex; align-items: center; justify-content: space-between; padding: 5px 14px 7px; margin-top: 3px; }
-  .tv-brand { font-size: 8px; font-weight: 700; letter-spacing: 2.5px; color: rgba(255,255,255,.12); text-transform: uppercase; }
-  .led { width: 5px; height: 5px; border-radius: 50%; background: rgba(122,184,139,.7); box-shadow: 0 0 5px rgba(122,184,139,.55); transition: all .3s; }
-  .led.off { background: rgba(255,80,80,.4); box-shadow: 0 0 4px rgba(255,80,80,.3); }
+  .tv-brand { font-size: 8px; font-weight: 700; letter-spacing: 2.5px; color: rgba(0,0,0,.18); text-transform: uppercase; }
+  .led { width: 5px; height: 5px; border-radius: 50%; background: #7ab88b; box-shadow: 0 0 5px rgba(122,184,139,.6); transition: all .3s; }
+  .led.off { background: rgba(239,68,68,.5); box-shadow: 0 0 4px rgba(239,68,68,.35); }
 
   .stand { display: flex; flex-direction: column; align-items: center; }
-  .neck { width: 34px; height: 17px; background: linear-gradient(180deg, #1c1c2a, #111118); border-left: 1.5px solid rgba(255,255,255,.06); border-right: 1.5px solid rgba(255,255,255,.06); clip-path: polygon(12% 0%, 88% 0%, 100% 100%, 0% 100%); }
-  .foot { width: 108px; height: 7px; background: linear-gradient(180deg, #1e1e2c, #0e0e14); border-radius: 0 0 10px 10px; border: 1.5px solid rgba(255,255,255,.07); border-top: none; box-shadow: 0 5px 16px rgba(0,0,0,.2); }
+  .neck { width: 34px; height: 17px; background: linear-gradient(180deg, #cdd0c8, #bec2b9); border-left: 1.5px solid rgba(0,0,0,.07); border-right: 1.5px solid rgba(0,0,0,.07); clip-path: polygon(12% 0%, 88% 0%, 100% 100%, 0% 100%); }
+  .foot { width: 108px; height: 7px; background: linear-gradient(180deg, #cdd0c8, #bdbfc9); border-radius: 0 0 10px 10px; border: 1.5px solid rgba(0,0,0,.08); border-top: none; box-shadow: 0 5px 12px rgba(0,0,0,.08); }
 
   /* NOW PLAYING */
   .np { text-align: center; margin-bottom: 14px; }
