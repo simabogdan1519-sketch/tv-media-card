@@ -254,16 +254,16 @@ const TV_CSS = `
   }
 
   .screen {
-    width: 100%; aspect-ratio: 16/9; background: #04040a;
+    width: 100%; aspect-ratio: 16/9; background: #141918;
     border-radius: 8px; overflow: hidden; position: relative; transition: box-shadow .4s;
-    box-shadow: inset 0 0 28px rgba(0,0,0,.85), 0 0 0 1.5px rgba(0,0,0,.7);
+    box-shadow: inset 0 0 20px rgba(0,0,0,.5), 0 0 0 1.5px rgba(0,0,0,.25);
   }
-  .screen.on { box-shadow: inset 0 0 18px rgba(0,0,0,.4), 0 0 0 1.5px rgba(0,0,0,.5), 0 0 24px rgba(122,184,139,.08); }
+  .screen.on { box-shadow: inset 0 0 14px rgba(0,0,0,.3), 0 0 0 1.5px rgba(0,0,0,.2), 0 0 24px rgba(122,184,139,.08); }
   .scr-bg { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; transition: opacity .5s; }
-  .scr-bg::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 28%; background: linear-gradient(180deg, rgba(255,255,255,.032) 0%, transparent 100%); border-radius: 8px 8px 0 0; pointer-events: none; }
+  .scr-bg::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 28%; background: linear-gradient(180deg, rgba(255,255,255,.025) 0%, transparent 100%); border-radius: 8px 8px 0 0; pointer-events: none; }
   .logo-wrap { display:flex; align-items:center; justify-content:center; z-index:1; width:80%; height:60%; }
   .logo-wrap svg { display:block; width:100%; height:100%; object-fit:contain; }
-  .off-msg { font-size: 11px; color: rgba(255,255,255,.14); letter-spacing: 1.5px; text-transform: uppercase; }
+  .off-msg { font-size: 11px; color: rgba(255,255,255,.22); letter-spacing: 1.5px; text-transform: uppercase; }
 
   /* BENTO HOME SCREEN */
   .bento-home { width:100%; height:100%; display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(5,1fr); gap:3px; padding:4px; box-sizing:border-box; position:absolute; inset:0; z-index:1; }
